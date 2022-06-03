@@ -19,13 +19,15 @@ export const App: React.FunctionComponent = () => {
   const [callerNumberState, setCallerNumberState] = useState( '' );
   const [displayNameState, setDisplayNameState] = useState( '' );
   const [queueNameState, setQueueNameState] = useState( '' );
+  const [scenarioIdState, setScenarioIdState] = useState( '' );
 
   const url = new URL( document.URL );
   const urlSp = url.searchParams;
 
-  let callerNumber = urlSp.get( 'callernumber' );
-  let displayName = urlSp.get( 'displayname' );
-  let queueName = urlSp.get( 'queuename' );
+  let callerNumber: any = urlSp.get( 'callernumber' );
+  let displayName: any = urlSp.get( 'displayname' );
+  let queueName: any = urlSp.get( 'queuename' );
+  let scenarioId: any = urlSp.get( 'scenarioid' );
 
   useEffect( () => {
     urlSearchParamsHandler();
@@ -35,9 +37,10 @@ export const App: React.FunctionComponent = () => {
   const urlSearchParamsHandler = () => {
     console.log( 'URL params: number - ' + callerNumber + ' name - ' + displayName + ' queue - ' + queueName );
 
-    ( callerNumber !== null ) ? setCallerNumberState( callerNumber ) : setCallerNumberState( 'No caller number' );
-    ( displayName !== null ) ? setDisplayNameState( displayName ) : setDisplayNameState( 'No display name' );
-    ( queueName !== null ) ? setQueueNameState( queueName ) : setQueueNameState( 'No queue name' );
+    ( callerNumber !== null ) ? setCallerNumberState( callerNumber ) : setCallerNumberState( 'No Caller Number' );
+    ( displayName !== null ) ? setDisplayNameState( displayName ) : setDisplayNameState( 'No Display Name' );
+    ( queueName !== null ) ? setQueueNameState( queueName ) : setQueueNameState( 'No Queue Name' );
+    ( scenarioId !== null ) ? setScenarioIdState( scenarioId ) : setScenarioIdState( 'No Scenario ID' );
 
   };
 
@@ -49,7 +52,8 @@ export const App: React.FunctionComponent = () => {
         <TextField label="Caller Number" readOnly value={callerNumberState} />
         <TextField label="Display Name" readOnly value={displayNameState} />
         <TextField label="Queue Name" readOnly value={queueNameState} />
-        <p style={{ color: 'grey' }}>Params for the URL are callernumber, displayname & queuename</p>
+        <TextField label="Scenario ID" readOnly value={scenarioIdState} />
+        <p style={{ color: 'grey' }}>Params for the URL are callernumber, displayname, queuename & scenarioid</p>
       </Stack>
     </div>
   );
