@@ -1,4 +1,4 @@
-import { IStackStyles, IStackTokens, ITextStyles } from "@fluentui/react";
+import { IStackStyles, IStackTokens } from "@fluentui/react";
 
 
 export const stackTokens: IStackTokens = { childrenGap: 15 };
