@@ -22,7 +22,14 @@ export const App: React.FunctionComponent = () => {
   let queueName: any = urlSp.get( 'queuename' );
   let scenarioId: any = urlSp.get( 'scenarioid' );
   let searchParams: any = effects.getAllUrlParams
-  let searchParamsKeys: Array<string> = Object.keys( searchParams() );
+
+  let searchParamsKeys = () => {
+    if ( searchParams() === null || searchParams() === undefined ) {
+      return "No search params";
+    } else {
+      return Object.keys( searchParams() );
+    } 
+  }
 
   useEffect( () => {
     urlSearchParamsHandler();
@@ -31,8 +38,8 @@ export const App: React.FunctionComponent = () => {
 
   const urlSearchParamsHandler = () => {
     console.log( 'URL params: number - ' + callerNumber + ' name - ' + displayName + ' queue - ' + queueName );
-    console.log( searchParams() )
-    console.log( searchParamsKeys );
+    console.log( searchParams() );
+    console.log( searchParamsKeys() );
 
     ( callerNumber !== null ) ? setCallerNumberState( callerNumber ) : setCallerNumberState( 'No Caller Number' );
     ( displayName !== null ) ? setDisplayNameState( displayName ) : setDisplayNameState( 'No Display Name' );
