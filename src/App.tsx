@@ -48,7 +48,7 @@ export const App: React.FunctionComponent = () => {
         <Stack horizontalAlign="center" verticalAlign="center" verticalFill styles={stackStyles} tokens={stackTokens}>
           <div style={{paddingTop: "25px"}}>
             <Toggle
-              offText="🌙 Mode"
+              offText="🌒 Mode"
               onText="🔆 Mode"
               onChange={() => setDisableDarkMode( !disableDarkMode )}
             />
