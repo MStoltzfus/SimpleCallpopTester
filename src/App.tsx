@@ -17,12 +17,20 @@ export const App: React.FunctionComponent = () => {
   const url = new URL( document.URL );
   const urlSp = url.searchParams;
 
+
   let callerNumber: string | null = urlSp.get( 'callernumber' );
   let displayName: string | null = urlSp.get( 'displayname' );
   let queueName: string | null = urlSp.get( 'queuename' );
   let scenarioId: string | null = urlSp.get( 'scenarioid' );
   let searchParams: any = utils.getAllUrlParams
-  let searchParamsKeys: Array<string> = Object.keys( searchParams() );
+  
+  let searchParamsKeys = () => {
+    if ( searchParams() === null || searchParams() === undefined ) {
+      return "No search params";
+    } else {
+      return Object.keys( searchParams() );
+    } 
+  }
 
   useEffect( () => {
     urlSearchParamsHandler();
@@ -42,8 +50,8 @@ export const App: React.FunctionComponent = () => {
 
   const urlSearchParamsHandler = () => {
     console.log( 'URL params: number - ' + callerNumber + ' name - ' + displayName + ' queue - ' + queueName );
-    console.log( searchParams() )
-    console.log( searchParamsKeys );
+    console.log( searchParams() );
+    console.log( searchParamsKeys() );
 
     ( callerNumber !== null ) ? setCallerNumberState( callerNumber ) : setCallerNumberState( 'No Caller Number' );
     ( displayName !== null ) ? setDisplayNameState( displayName ) : setDisplayNameState( 'No Display Name' );
