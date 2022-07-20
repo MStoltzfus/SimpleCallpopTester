@@ -1,10 +1,6 @@
-import { TextField, Stack } from '@fluentui/react/';
-
-export const TextFieldStyledExample: React.FunctionComponent = () => {
+export const TextFieldStyledExample: React.FunctionComponent = ( props ) => {
   return (
-    <Stack tokens={{ childrenGap: 15 }}>
-      <TextField label="Custom styled TextField" />
-    </Stack>
+    <p>{props.children}</p>
   );
 };
 

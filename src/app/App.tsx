@@ -8,29 +8,8 @@ import { utils } from './utils';
 export const App: React.FunctionComponent = () => {
 
   const [disableDarkMode, setDisableDarkMode] = useState( utils.checkLightThemeSetting() );
-
-  const [callerNumberState, setCallerNumberState] = useState( '' );
-  const [displayNameState, setDisplayNameState] = useState( '' );
-  const [queueNameState, setQueueNameState] = useState( '' );
-  const [scenarioIdState, setScenarioIdState] = useState( '' );
-
-  const url = new URL( document.URL );
-  const urlSp = url.searchParams;
-
-
-  let callerNumber: string | null = urlSp.get( 'callernumber' );
-  let displayName: string | null = urlSp.get( 'displayname' );
-  let queueName: string | null = urlSp.get( 'queuename' );
-  let scenarioId: string | null = urlSp.get( 'scenarioid' );
-  let searchParams: any = utils.getAllUrlParams
   
-  let searchParamsKeys = () => {
-    if ( searchParams() === null || searchParams() === undefined ) {
-      return "No search params";
-    } else {
-      return Object.keys( searchParams() );
-    } 
-  }
+  let searchParams: any = utils.getAllUrlParams
 
   useEffect( () => {
     urlSearchParamsHandler();
@@ -38,26 +17,20 @@ export const App: React.FunctionComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
+
   const themeToggleSwitchHandler = () => {
-    if ( disableDarkMode !== true ) {
+    if ( disableDarkMode === false ) {
       setDisableDarkMode( !disableDarkMode );
       localStorage.setItem( "theme", "light" );
-    } else {
+    }
+    if ( disableDarkMode === true ) {
       setDisableDarkMode( !!disableDarkMode );
       localStorage.setItem( "theme", 'dark' );
     }
   };
 
   const urlSearchParamsHandler = () => {
-    console.log( 'URL params: number - ' + callerNumber + ' name - ' + displayName + ' queue - ' + queueName );
-    console.log( searchParams() );
-    console.log( searchParamsKeys() );
-
-    ( callerNumber !== null ) ? setCallerNumberState( callerNumber ) : setCallerNumberState( 'No Caller Number' );
-    ( displayName !== null ) ? setDisplayNameState( displayName ) : setDisplayNameState( 'No Display Name' );
-    ( queueName !== null ) ? setQueueNameState( queueName ) : setQueueNameState( 'No Queue Name' );
-    ( scenarioId !== null ) ? setScenarioIdState( scenarioId ) : setScenarioIdState( 'No Scenario ID' );
-
+    console.log( 'Search params full object -', searchParams() );
   };
 
   return (
@@ -73,11 +46,11 @@ export const App: React.FunctionComponent = () => {
             />
           </div>
           <Text variant={'xLarge'}> The URL Params are - </Text>
-          <TextField label="Caller Number" readOnly value={callerNumberState} />
-          <TextField label="Display Name" readOnly value={displayNameState} />
-          <TextField label="Queue Name" readOnly value={queueNameState} />
-          <TextField label="Scenario ID" readOnly value={scenarioIdState} />
-          <Text>Params for the URL are callernumber, displayname, queuename & scenarioid</Text>
+          <>
+          {searchParams().length > 0 && searchParams().map(( props:any ) => (
+            <TextField label={props.key} readOnly value={props.value}/>
+          ))}
+          </>
         </Stack>
       </div>
     </ThemeProvider>
