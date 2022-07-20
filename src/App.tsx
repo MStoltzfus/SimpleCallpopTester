@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { Stack, Text, TextField, Toggle, ThemeProvider } from '@fluentui/react';
 import { stackStyles, stackTokens } from './styles'; // import the styles from the styles file
 import { darkTheme, lightTheme } from './themes'; // import the themes for FluentUI
-import { effects } from './sideEffects';
+import { utils } from './utils';
 
 export const App: React.FunctionComponent = () => {
 
-  const [disableDarkMode, setDisableDarkMode] = useState( false );
+  const [disableDarkMode, setDisableDarkMode] = useState( utils.checkLightThemeSetting() );
 
   const [callerNumberState, setCallerNumberState] = useState( '' );
   const [displayNameState, setDisplayNameState] = useState( '' );
@@ -17,12 +17,13 @@ export const App: React.FunctionComponent = () => {
   const url = new URL( document.URL );
   const urlSp = url.searchParams;
 
-  let callerNumber: any = urlSp.get( 'callernumber' );
-  let displayName: any = urlSp.get( 'displayname' );
-  let queueName: any = urlSp.get( 'queuename' );
-  let scenarioId: any = urlSp.get( 'scenarioid' );
-  let searchParams: any = effects.getAllUrlParams
 
+  let callerNumber: string | null = urlSp.get( 'callernumber' );
+  let displayName: string | null = urlSp.get( 'displayname' );
+  let queueName: string | null = urlSp.get( 'queuename' );
+  let scenarioId: string | null = urlSp.get( 'scenarioid' );
+  let searchParams: any = utils.getAllUrlParams
+  
   let searchParamsKeys = () => {
     if ( searchParams() === null || searchParams() === undefined ) {
       return "No search params";
@@ -33,8 +34,19 @@ export const App: React.FunctionComponent = () => {
 
   useEffect( () => {
     urlSearchParamsHandler();
+    utils.localStorageSetter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
+
+  const themeToggleSwitchHandler = () => {
+    if ( disableDarkMode !== true ) {
+      setDisableDarkMode( !disableDarkMode );
+      localStorage.setItem( "theme", "light" );
+    } else {
+      setDisableDarkMode( !!disableDarkMode );
+      localStorage.setItem( "theme", 'dark' );
+    }
+  };
 
   const urlSearchParamsHandler = () => {
     console.log( 'URL params: number - ' + callerNumber + ' name - ' + displayName + ' queue - ' + queueName );
@@ -48,16 +60,16 @@ export const App: React.FunctionComponent = () => {
 
   };
 
-
   return (
     <ThemeProvider applyTo="body" theme={disableDarkMode ? lightTheme : darkTheme}>
       <div>
         <Stack horizontalAlign="center" verticalAlign="center" verticalFill styles={stackStyles} tokens={stackTokens}>
-          <div style={{paddingTop: "25px"}}>
+          <div style={{ paddingTop: "25px" }}>
             <Toggle
+              defaultChecked={utils.checkLightThemeSetting()}
               offText="🌒 Mode"
               onText="🔆 Mode"
-              onChange={() => setDisableDarkMode( !disableDarkMode )}
+              onChange={() => themeToggleSwitchHandler()}
             />
           </div>
           <Text variant={'xLarge'}> The URL Params are - </Text>
