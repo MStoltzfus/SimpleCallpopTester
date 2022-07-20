@@ -47,7 +47,7 @@ export const App: React.FunctionComponent = () => {
           </div>
           <Text variant={'xLarge'}> The URL Params are - </Text>
           <>
-          {searchParams().length > 0 && searchParams().map(( props:any ) => (
+          {searchParams().map(( props:any ) => (
             <TextField label={props.key} readOnly value={props.value}/>
           ))}
           </>
