@@ -62,7 +62,8 @@ export const utils = {
           }
         }
       }
-      return obj;
+      let out = Object.entries(obj).map(([k, v]) => ({ key: k, value: v }));
+      return out;
     }
   },
   checkLightThemeSetting() {
