@@ -6,16 +6,16 @@ import { stackStyles, stackTokens } from './styles'; // import the styles from t
 import { darkTheme, lightTheme } from './themes'; // import the themes for FluentUI
 import { utils } from './utils';
 
+//A simple SPA for displaying URL search params created with React, TypeScript & Themed FluentUI. Practically used testing callpop properties in Landis Technologies software products.
+
 export const App: React.FunctionComponent = () => {
 
-  const [disableDarkMode, setDisableDarkMode] = useState( utils.checkLightThemeSetting() );
+  const [disableDarkMode, setDisableDarkMode] = useState( utils.checkLightThemeSetting() ); // set the initial state of the dark mode toggle to the value of the setting in local storage
 
-  let searchParams = utils.getAllUrlParams
-  let foo = searchParams();
+  let searchParams = utils.getAllUrlParams(); //Calls the method to get URL Search Params and create an easy to work with array from them
 
   useEffect( () => {
     utils.localStorageSetter();
-    console.log(foo)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
@@ -43,8 +43,10 @@ export const App: React.FunctionComponent = () => {
               onChange={() => themeToggleSwitchHandler()}
             />
           </div>
-          <Text variant={'xLarge'}> Michael's URL Param Tester </Text>
-          <ListItemsComponent props={foo}/>
+          <div style={{ paddingBottom: '15px' }}>
+            <Text variant={'xLarge'}> Michael's URL Param Tester </Text>
+          </div>
+          <ListItemsComponent props={searchParams} />
         </Stack>
       </div>
     </ThemeProvider>
