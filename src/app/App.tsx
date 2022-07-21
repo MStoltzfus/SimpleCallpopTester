@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Stack, Text, TextField, Toggle, ThemeProvider } from '@fluentui/react';
+import { Stack, Text, Toggle, ThemeProvider } from '@fluentui/react';
+import ListItemsComponent from './ListItemsComponent';
 import { stackStyles, stackTokens } from './styles'; // import the styles from the styles file
 import { darkTheme, lightTheme } from './themes'; // import the themes for FluentUI
 import { utils } from './utils';
@@ -8,11 +9,11 @@ import { utils } from './utils';
 export const App: React.FunctionComponent = () => {
 
   const [disableDarkMode, setDisableDarkMode] = useState( utils.checkLightThemeSetting() );
-  
-  let searchParams: any = utils.getAllUrlParams
+
+  let searchParams = utils.getAllUrlParams
+  let foo = searchParams(undefined)
 
   useEffect( () => {
-    urlSearchParamsHandler();
     utils.localStorageSetter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
@@ -29,10 +30,6 @@ export const App: React.FunctionComponent = () => {
     }
   };
 
-  const urlSearchParamsHandler = () => {
-    console.log( 'Search params full object -', searchParams() );
-  };
-
   return (
     <ThemeProvider applyTo="body" theme={disableDarkMode ? lightTheme : darkTheme}>
       <div>
@@ -45,12 +42,8 @@ export const App: React.FunctionComponent = () => {
               onChange={() => themeToggleSwitchHandler()}
             />
           </div>
-          <Text variant={'xLarge'}> The URL Params are - </Text>
-          <>
-          {searchParams().map(( props:any ) => (
-            <TextField label={props.key} readOnly value={props.value}/>
-          ))}
-          </>
+          <Text variant={'xLarge'}> Michael's URL Param Tester </Text>
+          <ListItemsComponent props={foo}/>
         </Stack>
       </div>
     </ThemeProvider>
