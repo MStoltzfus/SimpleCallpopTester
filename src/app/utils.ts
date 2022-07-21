@@ -1,11 +1,14 @@
 export const utils = {
-  getAllUrlParams(url: any) {
+  getAllUrlParams(url?: string) {
     //Code from https://www.sitepoint.com/get-url-parameters-with-javascript/
 
     // get query string from url (optional) or window
-    var queryString: string | null = url
+    var encodedQueryString: string | null | undefined = url
       ? url.split("?")[1]
       : window.location.search.slice(1);
+
+    // we'll decode the URI here first
+    var queryString = decodeURIComponent(encodedQueryString);
 
     // we'll store the parameters here
     var obj: any = {};
@@ -24,12 +27,14 @@ export const utils = {
 
         // set parameter name and value (use 'true' if empty)
         var paramName: string = a[0];
-        var paramValue: string | boolean = typeof a[1] === "undefined" ? true : a[1];
+        var paramValue: string =
+          typeof a[1] === "undefined" ? 'No Param Value Provided' : a[1];
 
-        // (optional) keep case consistent
+        /* (optional) keep case consistent
         paramName = paramName.toLowerCase();
         if (typeof paramValue === "string")
           paramValue = paramValue.toLowerCase();
+        */
 
         // if the paramName ends with square brackets, e.g. colors[] or colors[2]
         if (paramName.match(/\[(\d+)?\]$/)) {
