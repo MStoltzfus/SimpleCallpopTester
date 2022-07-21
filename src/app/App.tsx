@@ -26,7 +26,7 @@ export const App: React.FunctionComponent = () => {
       localStorage.setItem( "theme", "light" );
     }
     if ( disableDarkMode === true ) {
-      setDisableDarkMode( !!disableDarkMode );
+      setDisableDarkMode( !disableDarkMode );
       localStorage.setItem( "theme", 'dark' );
     }
   };
