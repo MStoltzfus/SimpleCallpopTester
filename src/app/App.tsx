@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Stack, Text, Toggle, ThemeProvider } from '@fluentui/react';
-import ListItemsComponent from './ListItemsComponent';
+import ListItemsComponent from './components/ListItemsComponent';
 import { stackStyles, stackTokens } from './styles'; // import the styles from the styles file
 import { darkTheme, lightTheme } from './themes'; // import the themes for FluentUI
 import { utils } from './utils';
@@ -11,10 +11,11 @@ export const App: React.FunctionComponent = () => {
   const [disableDarkMode, setDisableDarkMode] = useState( utils.checkLightThemeSetting() );
 
   let searchParams = utils.getAllUrlParams
-  let foo = searchParams(undefined)
+  let foo = searchParams();
 
   useEffect( () => {
     utils.localStorageSetter();
+    console.log(foo)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
