@@ -20,7 +20,7 @@ const ListItemsComponent = ( props: any ) => {
   if ( props.props === undefined ) {
     return <NoParamsMessage />
   } else {
-    let excludeAppNameKey = props.props.filter((data: { key: string; }) => data.key !== 'appName'); //Dirty fix that excludes the appName URL param/value from being rendered in the list
+    let excludeAppNameKey = props.props.filter((data: { key: string; }) => data.key !== 'appName'); //Dirty fix that excludes the appName URL param/value from being rendered in the list - this should probably be introduced deeper in the URL param parsing logic but this is the easiest place to put it for now
     return excludeAppNameKey.map( ( props: any ) => ( <TextField key={props.key} label={props.key} readOnly value={props.value} /> ) );
   }
 };
