@@ -68,7 +68,16 @@ export const utils = {
         }
       }
       let out = Object.entries(obj).map(([k, v]) => ({ key: k, value: v }));
+    
       return out;
+    }
+  },
+  isAppNameInUrl() {
+    let params = new URLSearchParams(document.location.search);
+    if (params.has("appName")) {
+      return params.get("appName");
+    } else {
+      return 'Michael\'s URL Param Tester'
     }
   },
   checkLightThemeSetting() {

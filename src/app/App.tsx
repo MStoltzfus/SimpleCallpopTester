@@ -31,7 +31,7 @@ export const App: React.FunctionComponent = () => {
     }
   };
 
-  //test commit
+  const appName = utils.isAppNameInUrl(); //Calls the method to check if the app name is in the URL
 
   return (
     <ThemeProvider applyTo="body" theme={disableDarkMode ? lightTheme : darkTheme}>
@@ -46,7 +46,7 @@ export const App: React.FunctionComponent = () => {
             />
           </div>
           <div style={{ paddingBottom: '15px' }}>
-            <Text variant={'xLarge'}> Michael's URL Param Tester </Text>
+            <Text variant={'xLarge'}> {appName} </Text>
           </div>
           <ListItemsComponent props={searchParams} />
         </Stack>

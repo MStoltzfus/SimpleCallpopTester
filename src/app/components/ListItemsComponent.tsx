@@ -15,11 +15,12 @@ const NoParamsMessage = () => {
 }
 
 const ListItemsComponent = ( props: any ) => {
+  let excludeAppNameKey = props.props.filter((data: { key: string; }) => data.key !== 'appName'); //Dirty fix that excludes the appName URL param/value from being rendered in the list
   if ( props.props === undefined ) {
     return <NoParamsMessage />
   } else {
-    return props.props.map( ( props: any ) => ( <TextField key={props.key} label={props.key} readOnly value={props.value} /> ) );
+    return excludeAppNameKey.map( ( props: any ) => ( <TextField key={props.key} label={props.key} readOnly value={props.value} /> ) );
   }
 };
 
-export default ListItemsComponent
+export default ListItemsComponent;
