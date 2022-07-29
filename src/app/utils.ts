@@ -1,4 +1,4 @@
-export const utils = {
+const utils = {
   getAllUrlParams(url?: string) {
     //Code from https://www.sitepoint.com/get-url-parameters-with-javascript/
 
@@ -28,7 +28,7 @@ export const utils = {
         // set parameter name and value (use 'true' if empty)
         var paramName: string = a[0];
         var paramValue: string =
-          typeof a[1] === "undefined" ? 'No Param Value Provided' : a[1];
+          typeof a[1] === "undefined" ? "No Param Value Provided" : a[1];
 
         /* (optional) keep case consistent
         paramName = paramName.toLowerCase();
@@ -68,7 +68,7 @@ export const utils = {
         }
       }
       let out = Object.entries(obj).map(([k, v]) => ({ key: k, value: v }));
-    
+
       return out;
     }
   },
@@ -77,15 +77,15 @@ export const utils = {
     if (params.has("appName")) {
       return params.get("appName");
     } else {
-      return 'Michael\'s URL Param Tester'
+      return "Michael's URL Param Tester";
     }
   },
-  checkLightThemeSetting() {
+  checkThemeSetting() {
     let theme = localStorage.getItem("theme");
-    if (theme === "light") {
-      return true;
+    if (theme === "dark") {
+      return "dark";
     }
-    return false;
+     return "light";
   },
   localStorageSetter() {
     let theme = localStorage.getItem("theme");
@@ -94,3 +94,5 @@ export const utils = {
     }
   },
 };
+
+export default utils;
