@@ -1,4 +1,4 @@
-import { IStackStyles, IStackTokens, DefaultPalette } from "@fluentui/react";
+import { IStackStyles, IStackTokens } from "@fluentui/react";
 
 const stackTokens: IStackTokens = { childrenGap: 15 };
 const stackStyles: Partial<IStackStyles> = {
