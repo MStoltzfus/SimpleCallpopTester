@@ -29,7 +29,8 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "run dev": "vite dev"
+    "run dev": "vite dev",
+    "dev": "vite dev"
   },
   "eslintConfig": {
     "extends": [

@@ -15,54 +15,42 @@ const SettingsPanel = ( props: any ) => {
     else if ( state.appThemeState === "light" ) {
       setState( ( state ) => ( { ...state, appThemeState: utils.checkThemeSetting() } ) );
       localStorage.setItem( "theme", 'dark' );
-    } 
+    }
     window.location.reload();
   };
 
   const pageToggleSwitchHandler = () => {
-    if ( state.appThemeState === "dark" ) {
-      setState( ( state ) => ( { ...state, appThemeState: utils.checkThemeSetting() } ) );
-      localStorage.setItem( "theme", "light" );
-    }
-    else if ( state.appThemeState === "light" ) {
-      setState( ( state ) => ( { ...state, appThemeState: utils.checkThemeSetting() } ) );
-      localStorage.setItem( "theme", 'dark' );
-    }
-  };
-
-  const themeToggleState = () => {
-    if ( utils.checkThemeSetting() === "dark" ) {
-      return false;
+    if ( state.appModeState === 0 ) {
+      return setState( ( state ) => ( { ...state, appModeState: 1 } ) );
     } else {
-      return true;
+      return setState( ( state ) => ( { ...state, appModeState: 0 } ) );
     }
   };
 
   return (
     <Panel
       headerText="Settings"
-      isOpen={props.isOpen}
-      onDismiss={props.onDismiss}
-      // You MUST provide this prop! Otherwise screen readers will just say "button" with no label.
+      isOpen={state.settingsPanelOpenState}
+      onDismiss={() => setState( ( state ) => ( { ...state, settingsPanelOpenState: !state.settingsPanelOpenState } ) )}
       closeButtonAriaLabel="Close"
     >
       <div style={{ paddingTop: "25px" }}>
         <Toggle
           label="Theme"
           inlineLabel
-          defaultChecked={themeToggleState()}
+          defaultChecked={utils.checkThemeSetting() === 'dark' ? false : true}
           offText="🌒 Mode"
           onText="🔆 Mode"
           onChange={() => themeToggleSwitchHandler()}
         />
         <Toggle
-          label="Outlook Mode"
+          label="Coming Soon - Callpop Mode"
           inlineLabel
           offText="Simple Mode"
           onText="Outlook Contact Mode"
           onChange={() => pageToggleSwitchHandler()}
         />
-        <TextField label="Custom Theme JSON" multiline rows={15} resizable={false} />
+        {/*<TextField label="Custom Theme JSON" multiline rows={15} resizable={false} />*/}
       </div>
     </Panel>
   )

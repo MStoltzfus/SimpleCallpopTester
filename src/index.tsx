@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './app/App';
 import { mergeStyles } from '@fluentui/react';
+import { GlobalStateProvider } from './GlobalState/GlobalStateProvider';
+
 //import reportWebVitals from './reportWebVitals';
 
 // Inject some global styles
@@ -14,7 +16,9 @@ mergeStyles( {
 } );
 
 ReactDOM.render(
-    <App />,
+  <GlobalStateProvider>
+    <App />
+  </GlobalStateProvider>,
   document.getElementById( 'root' )
 );
 

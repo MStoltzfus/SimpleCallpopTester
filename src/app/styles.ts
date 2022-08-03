@@ -1,4 +1,5 @@
 import { IStackStyles, IStackTokens } from "@fluentui/react";
+import themes from "./themes";
 
 const stackTokens: IStackTokens = { childrenGap: 15 };
 const stackStyles: Partial<IStackStyles> = {
@@ -8,17 +9,34 @@ const stackStyles: Partial<IStackStyles> = {
     textAlign: "center",
   },
 };
-const headerStackStyles: Partial<IStackStyles> = {
-  root: {
-    margin: "0 auto",
-    textAlign: "center",
+
+type headerStackStyles = {
+  darkTheme:Partial<IStackStyles>;
+  lightTheme:Partial<IStackStyles>;
+}
+
+const headerStackStyles: headerStackStyles = {
+  darkTheme: {
+    root: {
+      margin: "0 auto",
+      textAlign: "center",
+      backgroundColor: themes.dark.palette.themeDarker,
+    },
+  },
+  lightTheme: {
+    root: {
+      margin: "0 auto",
+      textAlign: "center",
+      backgroundColor: themes.dark.palette.white,
+    },
   },
 };
+
 const headerItemStyles: React.CSSProperties = {
-  alignItems: "center",
   display: "flex",
-  height: 50,
+  alignItems: "center",
   justifyContent: "center",
+  height: 50,
   minWidth: 50,
 };
 
