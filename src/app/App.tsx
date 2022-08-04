@@ -18,9 +18,9 @@ export const App: React.FunctionComponent = () => {
     utils.localStorageSetter();
     setState( {
       ...state,
-      appThemeState: utils.checkThemeSetting(),
+      appThemeState: utils.localStorageGetter().theme,
       settingsPanelOpenState: false,
-      appModeState: 0
+      appModeState: utils.localStorageGetter().appMode,
     } );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
