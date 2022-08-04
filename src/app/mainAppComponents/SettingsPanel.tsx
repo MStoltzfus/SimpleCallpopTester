@@ -9,21 +9,52 @@ const SettingsPanel = ( props: any ) => {
 
   const themeToggleSwitchHandler = () => {
     if ( state.appThemeState === "dark" ) {
-      setState( ( state ) => ( { ...state, appThemeState: utils.checkThemeSetting() } ) );
-      localStorage.setItem( "theme", "light" );
+      setState( ( state ) => ( { ...state, appThemeState: 'light' } ) );
+      localStorage.setItem( "Settings", JSON.stringify( {
+        name: "Settings",
+        Settings: {
+          theme: "light",
+          appMode: state.appModeState,
+        },
+      }
+      ) );
+      localStorage.setItem( "Settings", JSON.stringify( { theme: 'light' } ) );
     }
     else if ( state.appThemeState === "light" ) {
-      setState( ( state ) => ( { ...state, appThemeState: utils.checkThemeSetting() } ) );
-      localStorage.setItem( "theme", 'dark' );
+      setState( ( state ) => ( { ...state, appThemeState: 'dark' } ) );
+      localStorage.setItem( "Settings", JSON.stringify( {
+        name: "Settings",
+        Settings: {
+          theme: "dark",
+          appMode: state.appModeState,
+        },
+      }
+      ) );
     }
     window.location.reload();
   };
 
   const pageToggleSwitchHandler = () => {
     if ( state.appModeState === 0 ) {
-      return setState( ( state ) => ( { ...state, appModeState: 1 } ) );
+      setState( ( state ) => ( { ...state, appModeState: 1 } ) );
+      localStorage.setItem( "Settings", JSON.stringify( {
+        name: "Settings",
+        Settings: {
+          theme: state.appThemeState,
+          appMode: 1,
+        },
+      }
+      ) );
     } else {
-      return setState( ( state ) => ( { ...state, appModeState: 0 } ) );
+      setState( ( state ) => ( { ...state, appModeState: 0 } ) );
+      localStorage.setItem( "Settings", JSON.stringify( {
+        name: "Settings",
+        Settings: {
+          theme: state.appThemeState,
+          appMode: 0,
+        },
+      }
+      ) );
     }
   };
 
@@ -38,7 +69,7 @@ const SettingsPanel = ( props: any ) => {
         <Toggle
           label="Theme"
           inlineLabel
-          defaultChecked={utils.checkThemeSetting() === 'dark' ? false : true}
+          defaultChecked={utils.localStorageGetter().theme === 'dark' ? false : true}
           offText="🌒 Mode"
           onText="🔆 Mode"
           onChange={() => themeToggleSwitchHandler()}

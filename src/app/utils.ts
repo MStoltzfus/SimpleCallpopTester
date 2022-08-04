@@ -1,3 +1,5 @@
+import { defaultLocalStorageSettings } from "../localStorage.types";
+
 const utils = {
   getAllUrlParams(url?: string) {
     //Code from https://www.sitepoint.com/get-url-parameters-with-javascript/
@@ -80,17 +82,22 @@ const utils = {
       return "Michael's URL Param Tester";
     }
   },
-  checkThemeSetting() {
-    let theme = localStorage.getItem("theme");
-    if (theme === "dark") {
-      return "dark";
-    }
-     return "light";
+  localStorageGetter() {
+    let settings = localStorage.getItem("Settings");
+    if (settings !== null) {
+      let parsedSettings = JSON.parse(settings);
+      console.log(parsedSettings);
+      return parsedSettings;
+    } console.log("No settings found in local storage - THIS SHOULD NEVER HAPPEN");
+      return defaultLocalStorageSettings
   },
   localStorageSetter() {
-    let theme = localStorage.getItem("theme");
-    if (theme === null) {
-      localStorage.setItem("theme", "dark");
+    let settings = localStorage.getItem("Settings");
+    if (settings === null) {
+      localStorage.setItem(
+        defaultLocalStorageSettings.name,
+        JSON.stringify(defaultLocalStorageSettings.Settings)
+      );
     }
   },
 };
