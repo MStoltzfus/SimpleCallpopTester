@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { App } from './app/App';
 import { mergeStyles } from '@fluentui/react';
 import { GlobalStateProvider } from './GlobalState/GlobalStateProvider';
+import utils from './app/utils';
 
 //import reportWebVitals from './reportWebVitals';
 
@@ -14,6 +15,8 @@ mergeStyles( {
     height: '100vh',
   },
 } );
+
+utils.localStorageDefaultsSetter(); //Set the default values for the local storage
 
 ReactDOM.render(
   <GlobalStateProvider>

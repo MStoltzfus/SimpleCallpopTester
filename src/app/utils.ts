@@ -88,17 +88,37 @@ const utils = {
       let parsedSettings = JSON.parse(settings);
       console.log(parsedSettings);
       return parsedSettings;
-    } console.log("No settings found in local storage - THIS SHOULD NEVER HAPPEN");
-      return defaultLocalStorageSettings
+    }
+    return console.error(
+      "No settings found in local storage - THIS SHOULDN'T HAPPEN"
+    );
   },
-  localStorageSetter() {
+  localStorageDefaultsSetter() {
     let settings = localStorage.getItem("Settings");
-    if (settings === null) {
+    if (settings === null || undefined) {
       localStorage.setItem(
         defaultLocalStorageSettings.name,
         JSON.stringify(defaultLocalStorageSettings.Settings)
       );
     }
+  },
+  localStorageSetter(settingKey: string, settingValue: string | number) {
+    let settings = this.localStorageGetter();
+    if (settings !== null || undefined) {
+      console.log(settings);
+      switch (settingKey) {
+        case "theme":
+          settings.theme = settingValue;
+          localStorage.setItem("Settings", JSON.stringify(settings));
+          break;
+        case "appMode":
+          settings.appMode = settingValue;
+          localStorage.setItem("Settings", JSON.stringify(settings));
+          break;
+      }
+      return console.log('updated settings: ', settings);
+    }
+    return console.error("settings storage error");
   },
 };
 

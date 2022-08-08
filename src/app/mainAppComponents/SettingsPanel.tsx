@@ -9,52 +9,26 @@ const SettingsPanel = ( props: any ) => {
 
   const themeToggleSwitchHandler = () => {
     if ( state.appThemeState === "dark" ) {
-      setState( ( state ) => ( { ...state, appThemeState: 'light' } ) );
-      localStorage.setItem( "Settings", JSON.stringify( {
-        name: "Settings",
-        Settings: {
-          theme: "light",
-          appMode: state.appModeState,
-        },
-      }
-      ) );
-      localStorage.setItem( "Settings", JSON.stringify( { theme: 'light' } ) );
-    }
-    else if ( state.appThemeState === "light" ) {
-      setState( ( state ) => ( { ...state, appThemeState: 'dark' } ) );
-      localStorage.setItem( "Settings", JSON.stringify( {
-        name: "Settings",
-        Settings: {
-          theme: "dark",
-          appMode: state.appModeState,
-        },
-      }
-      ) );
+      let updatedState:string = "light";
+      setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
+      utils.localStorageSetter( "theme", updatedState );
+    } else {
+      let updatedState:string = "dark";
+      setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
+      utils.localStorageSetter( "theme", updatedState );
     }
     window.location.reload();
   };
 
-  const pageToggleSwitchHandler = () => {
+  const modeToggleSwitchHandler = () => {
     if ( state.appModeState === 0 ) {
-      setState( ( state ) => ( { ...state, appModeState: 1 } ) );
-      localStorage.setItem( "Settings", JSON.stringify( {
-        name: "Settings",
-        Settings: {
-          theme: state.appThemeState,
-          appMode: 1,
-        },
-      }
-      ) );
+      let updatedState:number = 1;
+      setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
+      utils.localStorageSetter("appMode", updatedState);
     } else {
-      setState( ( state ) => ( { ...state, appModeState: 0 } ) );
-      localStorage.setItem( "Settings", JSON.stringify( {
-        name: "Settings",
-        Settings: {
-          theme: state.appThemeState,
-          appMode: 0,
-        },
-      }
-      ) );
+      let updatedState:number = 0;
+      setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
+      utils.localStorageSetter("appMode", updatedState);
     }
   };
 
@@ -77,9 +51,10 @@ const SettingsPanel = ( props: any ) => {
         <Toggle
           label="Coming Soon - Callpop Mode"
           inlineLabel
+          defaultChecked={utils.localStorageGetter().appMode === 0 ? false : true}
           offText="Simple Mode"
           onText="Outlook Contact Mode"
-          onChange={() => pageToggleSwitchHandler()}
+          onChange={() => modeToggleSwitchHandler()}
         />
         {/*<TextField label="Custom Theme JSON" multiline rows={15} resizable={false} />*/}
       </div>

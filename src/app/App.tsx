@@ -7,6 +7,7 @@ import utils from './utils';
 import { Header } from './mainAppComponents/Header';
 import SimpleGenerator from './Pages/simpleGenerator/SimpleGenerator';
 import OutlookContactsConnector from './Pages/outlookContactsConnector/OutlookContactsConnector';
+import { defaultMaxListeners } from 'events';
 
 //A simple SPA for displaying URL search params created with React, TypeScript & Themed FluentUI. Practically used testing callpop properties in Landis Technologies software products.
 
@@ -14,14 +15,18 @@ export const App: React.FunctionComponent = () => {
 
   const { state, setState } = useGlobalState();
 
-  useEffect( () => {
-    utils.localStorageSetter();
+  function defaultStateSetter(){
+    let initSettings = utils.localStorageGetter();
     setState( {
       ...state,
-      appThemeState: utils.localStorageGetter().theme,
+      appThemeState: initSettings.theme,
       settingsPanelOpenState: false,
-      appModeState: utils.localStorageGetter().appMode,
+      appModeState: initSettings.appMode,
     } );
+  }
+
+  useEffect( () => {
+    defaultStateSetter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
