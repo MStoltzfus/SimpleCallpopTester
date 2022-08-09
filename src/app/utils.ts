@@ -86,7 +86,6 @@ const utils = {
     let settings = localStorage.getItem("Settings");
     if (settings !== null) {
       let parsedSettings = JSON.parse(settings);
-      console.log(parsedSettings);
       return parsedSettings;
     }
     return console.error(
@@ -105,7 +104,6 @@ const utils = {
   localStorageSetter(settingKey: string, settingValue: string | number) {
     let settings = this.localStorageGetter();
     if (settings !== null || undefined) {
-      console.log(settings);
       switch (settingKey) {
         case "theme":
           settings.theme = settingValue;
@@ -116,9 +114,16 @@ const utils = {
           localStorage.setItem("Settings", JSON.stringify(settings));
           break;
       }
-      return console.log('updated settings: ', settings);
+      return console.log("updated settings: ", settings);
     }
     return console.error("settings storage error");
+  },
+  debounce(fn: Function, delay: number) {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return function (this: any, ...args: any[]) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
   },
 };
 

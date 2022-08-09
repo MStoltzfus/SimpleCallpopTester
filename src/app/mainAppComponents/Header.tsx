@@ -1,4 +1,4 @@
-import { Stack, Text, ThemeProvider, themeRulesStandardCreator } from '@fluentui/react';
+import { Stack, Text, ThemeProvider } from '@fluentui/react';
 import { headerStackStyles, headerItemStyles } from '../styles';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import { SettingsButton } from './SettingsButton';

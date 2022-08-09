@@ -5,9 +5,8 @@ import themes from './themes'; // import the themes for FluentUI
 import utils from './utils';
 
 import { Header } from './mainAppComponents/Header';
-import SimpleGenerator from './Pages/simpleGenerator/SimpleGenerator';
-import OutlookContactsConnector from './Pages/outlookContactsConnector/OutlookContactsConnector';
-import { defaultMaxListeners } from 'events';
+import HiddenSettingsPanel from './mainAppComponents/HiddenSettingsPanel';
+import { SimpleGenerator, OutlookContactsConnector, Error } from './Pages/Pages';
 
 //A simple SPA for displaying URL search params created with React, TypeScript & Themed FluentUI. Practically used testing callpop properties in Landis Technologies software products.
 
@@ -15,14 +14,25 @@ export const App: React.FunctionComponent = () => {
 
   const { state, setState } = useGlobalState();
 
-  function defaultStateSetter(){
+  function defaultStateSetter() {
     let initSettings = utils.localStorageGetter();
     setState( {
       ...state,
       appThemeState: initSettings.theme,
       settingsPanelOpenState: false,
+      secretSettingsPanelOpenState: false,
       appModeState: initSettings.appMode,
+      themePaletteState: initSettings.theme === "dark" ? themes.dark.palette : themes.light.palette,
     } );
+  }
+
+  const secretSettingsDivHandler = () => {
+    if ( state.settingsPanelOpenState === false ) {
+      setState( ( state ) => ( { ...state, secretSettingsPanelOpenState: true } ) );
+    } else {
+      setState( ( state ) => ( { ...state, secretSettingsPanelOpenState: false } ) );
+    }
+
   }
 
   useEffect( () => {
@@ -33,6 +43,7 @@ export const App: React.FunctionComponent = () => {
   const appName = utils.isAppNameInUrl(); //Calls the method to check if the app name is in the URL
 
   console.log( state )
+
   return (
     <ThemeProvider applyTo={"body"} theme={state.appThemeState === "dark" ? themes.dark : themes.light}>
       <div className="App">
@@ -42,13 +53,23 @@ export const App: React.FunctionComponent = () => {
             case 0:
               return <SimpleGenerator />;
             case 1:
-              return <OutlookContactsConnector />;
+              return /*<OutlookContactsConnector />*/<Error errorMessage='Somehow you got to the wrong place!' errorCode='1234567890' />;
             default:
-              return <SimpleGenerator />;
+              return <Error errorMessage='Somehow you got to the wrong place!' errorCode='1234567890' />;
           }
         } )()}
-
       </div>
+      <div
+        className='hiddenSettingsPanel'
+        style={{
+          height: '15px',
+          position: 'fixed',
+          bottom: 0,
+          width: "100%"
+        }}
+        onClick={secretSettingsDivHandler}
+      />
+      <HiddenSettingsPanel />
     </ThemeProvider>
   );
 };

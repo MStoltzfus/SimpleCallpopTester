@@ -1,11 +1,14 @@
 import React, { createContext, useState, useContext, Dispatch, SetStateAction } from "react";
+import { palleteItemTypes } from '../app/themes.types';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // \/ Add any new state values to the interface here \/
 interface GlobalStateInterface {
   appThemeState: string;
   settingsPanelOpenState: boolean;
+  secretSettingsPanelOpenState: boolean;
   appModeState: number;
+  themePaletteState: palleteItemTypes;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

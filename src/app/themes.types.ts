@@ -1,6 +1,5 @@
-export interface themeVariant {
-  palette: {
-    themePrimary: string;
+export interface palleteItemTypes {
+  themePrimary: string;
     themeLighterAlt: string;
     themeLighter: string;
     themeLight: string;
@@ -23,7 +22,10 @@ export interface themeVariant {
     neutralDark: string;
     black: string;
     white: string;
-  };
+}
+
+export interface themeVariant {
+  palette: palleteItemTypes;
 }
 
 export default interface ThemesType {

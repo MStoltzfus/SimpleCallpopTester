@@ -1,4 +1,5 @@
-import { Toggle, TextField, Panel } from '@fluentui/react';
+import { Toggle, Panel, TextField } from '@fluentui/react';
+import { settings } from 'cluster';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import utils from '../utils';
 
@@ -9,11 +10,11 @@ const SettingsPanel = ( props: any ) => {
 
   const themeToggleSwitchHandler = () => {
     if ( state.appThemeState === "dark" ) {
-      let updatedState:string = "light";
+      let updatedState: string = "light";
       setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
       utils.localStorageSetter( "theme", updatedState );
     } else {
-      let updatedState:string = "dark";
+      let updatedState: string = "dark";
       setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
       utils.localStorageSetter( "theme", updatedState );
     }
@@ -22,15 +23,29 @@ const SettingsPanel = ( props: any ) => {
 
   const modeToggleSwitchHandler = () => {
     if ( state.appModeState === 0 ) {
-      let updatedState:number = 1;
+      let updatedState: number = 1;
       setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
-      utils.localStorageSetter("appMode", updatedState);
+      utils.localStorageSetter( "appMode", updatedState );
     } else {
-      let updatedState:number = 0;
+      let updatedState: number = 0;
       setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
-      utils.localStorageSetter("appMode", updatedState);
+      utils.localStorageSetter( "appMode", updatedState );
     }
   };
+
+  const modeInputHandler = ( event: any, newValue: number ) => {
+
+  }
+
+  const settingsContainerStyle = {
+    display: "grid",
+    paddingTop: "25px",
+  }
+
+  const settingsListItemStyle = {
+    margin: 5,
+    display: "flex",
+  }
 
   return (
     <Panel
@@ -39,24 +54,20 @@ const SettingsPanel = ( props: any ) => {
       onDismiss={() => setState( ( state ) => ( { ...state, settingsPanelOpenState: !state.settingsPanelOpenState } ) )}
       closeButtonAriaLabel="Close"
     >
-      <div style={{ paddingTop: "25px" }}>
-        <Toggle
-          label="Theme"
-          inlineLabel
-          defaultChecked={utils.localStorageGetter().theme === 'dark' ? false : true}
-          offText="🌒 Mode"
-          onText="🔆 Mode"
-          onChange={() => themeToggleSwitchHandler()}
-        />
-        <Toggle
-          label="Coming Soon - Callpop Mode"
-          inlineLabel
-          defaultChecked={utils.localStorageGetter().appMode === 0 ? false : true}
-          offText="Simple Mode"
-          onText="Outlook Contact Mode"
-          onChange={() => modeToggleSwitchHandler()}
-        />
-        {/*<TextField label="Custom Theme JSON" multiline rows={15} resizable={false} />*/}
+      <div className="settingsPanelContent" style={settingsContainerStyle}>
+        <div style={settingsListItemStyle}>
+          <Toggle
+            label="Theme"
+            inlineLabel
+            defaultChecked={utils.localStorageGetter().theme === 'dark' ? false : true}
+            offText="🌒 Mode"
+            onText="🔆 Mode"
+            onChange={() => themeToggleSwitchHandler()}
+          />
+        </div>
+        <div style={settingsListItemStyle}>
+          {/*<TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />*/}
+        </div>
       </div>
     </Panel>
   )
