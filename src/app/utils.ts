@@ -1,3 +1,5 @@
+import { defaultLocalStorageSettings } from "../localStorage.types";
+
 const utils = {
   getAllUrlParams(url?: string) {
     //Code from https://www.sitepoint.com/get-url-parameters-with-javascript/
@@ -80,18 +82,48 @@ const utils = {
       return "Michael's URL Param Tester";
     }
   },
-  checkThemeSetting() {
-    let theme = localStorage.getItem("theme");
-    if (theme === "dark") {
-      return "dark";
+  localStorageGetter() {
+    let settings = localStorage.getItem("Settings");
+    if (settings !== null) {
+      let parsedSettings = JSON.parse(settings);
+      return parsedSettings;
     }
-     return "light";
+    return console.error(
+      "No settings found in local storage - THIS SHOULDN'T HAPPEN"
+    );
   },
-  localStorageSetter() {
-    let theme = localStorage.getItem("theme");
-    if (theme === null) {
-      localStorage.setItem("theme", "dark");
+  localStorageDefaultsSetter() {
+    let settings = localStorage.getItem("Settings");
+    if (settings === null || undefined) {
+      localStorage.setItem(
+        defaultLocalStorageSettings.name,
+        JSON.stringify(defaultLocalStorageSettings.Settings)
+      );
     }
+  },
+  localStorageSetter(settingKey: string, settingValue: string | number) {
+    let settings = this.localStorageGetter();
+    if (settings !== null || undefined) {
+      switch (settingKey) {
+        case "theme":
+          settings.theme = settingValue;
+          localStorage.setItem("Settings", JSON.stringify(settings));
+          break;
+        case "appMode":
+          settings.appMode = settingValue;
+          localStorage.setItem("Settings", JSON.stringify(settings));
+          break;
+      }
+      return console.log("updated settings: ", settings);
+    }
+    return console.error("settings storage error");
+  },
+  debounce(fn: Function, delay: number) {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return function (this: any, ...args: any[]) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
   },
 };
 

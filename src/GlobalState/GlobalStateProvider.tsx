@@ -1,8 +1,16 @@
 import React, { createContext, useState, useContext, Dispatch, SetStateAction } from "react";
+import { palleteItemTypes } from '../app/themes.types';
 
-export interface GlobalStateInterface {
-  theme: string;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// \/ Add any new state values to the interface here \/
+interface GlobalStateInterface {
+  appThemeState: string;
+  settingsPanelOpenState: boolean;
+  secretSettingsOpenState: boolean;
+  appModeState: number;
+  themePaletteState: palleteItemTypes;
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const GlobalStateContext = createContext( {
   state: {} as Partial<GlobalStateInterface>,
@@ -33,8 +41,3 @@ const useGlobalState = () => {
 };
 
 export { GlobalStateProvider, useGlobalState };
-
-
-
-//import utils from "../app/utils";
-//utils.checkLightThemeSetting(),

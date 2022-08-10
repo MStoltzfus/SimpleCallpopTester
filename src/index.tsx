@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './app/App';
 import { mergeStyles } from '@fluentui/react';
+import { GlobalStateProvider } from './GlobalState/GlobalStateProvider';
+import utils from './app/utils';
+
 //import reportWebVitals from './reportWebVitals';
 
 // Inject some global styles
@@ -13,8 +16,12 @@ mergeStyles( {
   },
 } );
 
+utils.localStorageDefaultsSetter(); //Set the default values for the local storage
+
 ReactDOM.render(
-    <App />,
+  <GlobalStateProvider>
+    <App />
+  </GlobalStateProvider>,
   document.getElementById( 'root' )
 );
 
