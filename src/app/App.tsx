@@ -5,7 +5,6 @@ import themes from './themes'; // import the themes for FluentUI
 import utils from './utils';
 
 import { Header } from './mainAppComponents/Header';
-import HiddenSettingsPanel from './mainAppComponents/HiddenSettingsPanel';
 import { SimpleGenerator, OutlookContactsConnector, Error } from './Pages/Pages';
 
 //A simple SPA for displaying URL search params created with React, TypeScript & Themed FluentUI. Practically used testing callpop properties in Landis Technologies software products.
@@ -20,19 +19,10 @@ export const App: React.FunctionComponent = () => {
       ...state,
       appThemeState: initSettings.theme,
       settingsPanelOpenState: false,
-      secretSettingsPanelOpenState: false,
+      secretSettingsOpenState: false,
       appModeState: initSettings.appMode,
       themePaletteState: initSettings.theme === "dark" ? themes.dark.palette : themes.light.palette,
     } );
-  }
-
-  const secretSettingsDivHandler = () => {
-    if ( state.settingsPanelOpenState === false ) {
-      setState( ( state ) => ( { ...state, secretSettingsPanelOpenState: true } ) );
-    } else {
-      setState( ( state ) => ( { ...state, secretSettingsPanelOpenState: false } ) );
-    }
-
   }
 
   useEffect( () => {
@@ -57,22 +47,10 @@ export const App: React.FunctionComponent = () => {
             case 2:
               return <Error errorMessage='Just a handy hack to test the error component 😅' errorCode='HELLOWORLDTEST' />;
             default:
-              return <Error errorMessage='Something went very wrong and IDEK how you managed to get here!' errorCode='123YOUMESSEDUP890' />;
+              return <Error errorMessage="Not Sure How You Got Here But That's An Invalid App Mode" errorCode='INVALIDAPPMODE' />;
           }
         } )()}
       </div>
-      <div
-        className='hiddenSettingsPanel'
-        style={{
-          height: '30px',
-          position: 'fixed',
-          bottom: 0,
-          right: 0,
-          width: '30px',
-        }}
-        onClick={secretSettingsDivHandler}
-      />
-      <HiddenSettingsPanel />
     </ThemeProvider>
   );
 };
