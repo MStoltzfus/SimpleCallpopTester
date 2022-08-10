@@ -1,5 +1,5 @@
 import { Toggle, Panel, TextField } from '@fluentui/react';
-import { settings } from 'cluster';
+import HiddenSettings from './HiddenSettings';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import utils from '../utils';
 
@@ -21,20 +21,8 @@ const SettingsPanel = ( props: any ) => {
     window.location.reload();
   };
 
-  const modeToggleSwitchHandler = () => {
-    if ( state.appModeState === 0 ) {
-      let updatedState: number = 1;
-      setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
-      utils.localStorageSetter( "appMode", updatedState );
-    } else {
-      let updatedState: number = 0;
-      setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
-      utils.localStorageSetter( "appMode", updatedState );
-    }
-  };
-
-  const modeInputHandler = ( event: any, newValue: number ) => {
-
+  const secretSettingsDivHandler = () => {
+    setState( ( state ) => ( { ...state, secretSettingsOpenState: !state.secretSettingsOpenState } ) );
   }
 
   const settingsContainerStyle = {
@@ -50,6 +38,7 @@ const SettingsPanel = ( props: any ) => {
   return (
     <Panel
       headerText="Settings"
+      isLightDismiss={true}
       isOpen={state.settingsPanelOpenState}
       onDismiss={() => setState( ( state ) => ( { ...state, settingsPanelOpenState: !state.settingsPanelOpenState } ) )}
       closeButtonAriaLabel="Close"
@@ -68,6 +57,18 @@ const SettingsPanel = ( props: any ) => {
         <div style={settingsListItemStyle}>
           {/*<TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />*/}
         </div>
+        <div
+          className='hiddenSettingsPanel'
+          style={{
+            height: '30px',
+            position: 'fixed',
+            bottom: 0,
+            right: 0,
+            width: '30px',
+          }}
+          onClick={secretSettingsDivHandler}
+        />
+        {state.secretSettingsOpenState ? <HiddenSettings /> : null}
       </div>
     </Panel>
   )

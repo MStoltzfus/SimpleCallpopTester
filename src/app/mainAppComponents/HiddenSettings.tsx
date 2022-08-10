@@ -1,8 +1,8 @@
-import { Toggle, Panel, PanelType, TextField, Modal } from '@fluentui/react';
+import { Toggle, TextField, DefaultButton } from '@fluentui/react';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import utils from '../utils';
 
-const HiddenSettingsPanel = ( props: any ) => {
+const HiddenSettings = ( props: any ) => {
 
   const { state, setState } = useGlobalState();
 
@@ -19,8 +19,7 @@ const HiddenSettingsPanel = ( props: any ) => {
   };
 
   const modeInputHandler = ( foo: any ) => {
-    let newValue = Number( foo )
-    console.log( newValue )
+    let newValue = Number( foo );
     setState( ( state ) => ( { ...state, appModeState: newValue } ) );
     utils.localStorageSetter( "appMode", newValue );
   }
@@ -31,6 +30,7 @@ const HiddenSettingsPanel = ( props: any ) => {
     paddingRight: 20,
     paddingLeft: 20,
     borderRadius: "20px",
+    outline: "1px solid white",
   }
 
   const settingsListItemStyle = {
@@ -39,12 +39,9 @@ const HiddenSettingsPanel = ( props: any ) => {
   }
 
   return (
-    <Modal
-      isOpen={state.secretSettingsPanelOpenState}
-      onDismiss={() => setState( ( state ) => ( { ...state, secretSettingsPanelOpenState: !state.secretSettingsPanelOpenState } ) )}
-    >
-      <div className="secretSettingsModalContent" style={settingsContainerStyle}>
-        <h2>Top-Secret Settings</h2>
+    <div>
+      <div className="secretSettingsContent" style={settingsContainerStyle}>
+        <h3>Top-Secret Settings</h3>
         <div style={settingsListItemStyle}>
           <Toggle
             label="Coming Soon - App Mode"
@@ -64,9 +61,13 @@ const HiddenSettingsPanel = ( props: any ) => {
         <div style={settingsListItemStyle}>
           <TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />
         </div>
+        <DefaultButton
+          text='Hide Secret Settings'
+          onClick={() => setState( ( state ) => ( { ...state, secretSettingsOpenState: !state.secretSettingsOpenState } ) )}
+        />
       </div>
-    </Modal>
+    </div>
   )
 }
 
-export default HiddenSettingsPanel
+export default HiddenSettings

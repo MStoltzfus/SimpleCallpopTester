@@ -6,7 +6,7 @@ import { palleteItemTypes } from '../app/themes.types';
 interface GlobalStateInterface {
   appThemeState: string;
   settingsPanelOpenState: boolean;
-  secretSettingsPanelOpenState: boolean;
+  secretSettingsOpenState: boolean;
   appModeState: number;
   themePaletteState: palleteItemTypes;
 }
