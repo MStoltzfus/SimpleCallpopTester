@@ -34,8 +34,7 @@ const HiddenSettings = ( props: any ) => {
   }
 
   const settingsListItemStyle = {
-    margin: 5,
-    display: "flex",
+    display: "grid",
   }
 
   return (
@@ -61,10 +60,12 @@ const HiddenSettings = ( props: any ) => {
         <div style={settingsListItemStyle}>
           <TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />
         </div>
-        <DefaultButton
-          text='Hide Secret Settings'
-          onClick={() => setState( ( state ) => ( { ...state, secretSettingsOpenState: !state.secretSettingsOpenState } ) )}
-        />
+        <div style={settingsListItemStyle}>
+          <DefaultButton
+            text='Hide Secret Settings'
+            onClick={() => setState( ( state ) => ( { ...state, secretSettingsOpenState: !state.secretSettingsOpenState } ) )}
+          />
+        </div>
       </div>
     </div>
   )
