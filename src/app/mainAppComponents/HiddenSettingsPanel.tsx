@@ -19,13 +19,10 @@ const HiddenSettingsPanel = ( props: any ) => {
   };
 
   const modeInputHandler = ( foo: any ) => {
-    let newValue = Number(foo)
-    if ( typeof newValue === "number") {
-      utils.debounce(()=>{
-        setState( ( state ) => ( { ...state, appModeState: newValue } ) );
-        utils.localStorageSetter( "appMode", newValue );
-      }, 450);
-    } console.log( newValue )
+    let newValue = Number( foo )
+    console.log( newValue )
+    setState( ( state ) => ( { ...state, appModeState: newValue } ) );
+    utils.localStorageSetter( "appMode", newValue );
   }
 
   const settingsContainerStyle = {
@@ -65,7 +62,7 @@ const HiddenSettingsPanel = ( props: any ) => {
           />
         </div>
         <div style={settingsListItemStyle}>
-          {/*<TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />*/}
+          <TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />
         </div>
       </div>
     </Modal>

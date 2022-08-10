@@ -40,7 +40,7 @@ const Error = ( props: errorProps ) => {
             maxHeight: "50vh",
           }}
           src='error.png' />
-        <h3 className="errorMessage" style={{ color: textColor }}>{props.errorMessage}</h3>
+        <h3 className="errorMessage" style={{ color: textColor, width:'75%', textAlign:'center' }}>{props.errorMessage}</h3>
         <p className="errorCode" style={{ color: textColor }}>Error Code: {props.errorCode}</p>
       </div>
     </div>

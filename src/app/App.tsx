@@ -53,19 +53,22 @@ export const App: React.FunctionComponent = () => {
             case 0:
               return <SimpleGenerator />;
             case 1:
-              return /*<OutlookContactsConnector />*/<Error errorMessage='Somehow you got to the wrong place!' errorCode='1234567890' />;
+              return <OutlookContactsConnector />;
+            case 2:
+              return <Error errorMessage='Just a handy hack to test the error component 😅' errorCode='HELLOWORLDTEST' />;
             default:
-              return <Error errorMessage='Somehow you got to the wrong place!' errorCode='1234567890' />;
+              return <Error errorMessage='Something went very wrong and IDEK how you managed to get here!' errorCode='123YOUMESSEDUP890' />;
           }
         } )()}
       </div>
       <div
         className='hiddenSettingsPanel'
         style={{
-          height: '15px',
+          height: '30px',
           position: 'fixed',
           bottom: 0,
-          width: "100%"
+          right: 0,
+          width: '30px',
         }}
         onClick={secretSettingsDivHandler}
       />
