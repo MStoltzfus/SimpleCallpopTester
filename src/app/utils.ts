@@ -1,4 +1,4 @@
-import { defaultLocalStorageSettings } from "../localStorage.types";
+import { defaultLocalStorageSettings } from "./localStorage.types";
 
 const utils = {
   getAllUrlParams(url?: string) {

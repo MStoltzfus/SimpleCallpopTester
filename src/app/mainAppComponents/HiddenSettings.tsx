@@ -63,7 +63,7 @@ const HiddenSettings = ( props: any ) => {
         <div style={settingsListItemStyle}>
           <DefaultButton
             text='Hide Secret Settings'
-            onClick={() => setState( ( state ) => ( { ...state, secretSettingsOpenState: !state.secretSettingsOpenState } ) )}
+            onClick={() => setState( ( state ) => ( { ...state, secretSettingsOpenState: 0 } ) )}
           />
         </div>
       </div>

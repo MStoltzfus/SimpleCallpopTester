@@ -1,4 +1,5 @@
-import { Toggle, Panel, TextField } from '@fluentui/react';
+import { useState } from 'react';
+import { Toggle, Panel } from '@fluentui/react';
 import HiddenSettings from './HiddenSettings';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import utils from '../utils';
@@ -22,7 +23,9 @@ const SettingsPanel = ( props: any ) => {
   };
 
   const secretSettingsDivHandler = () => {
-    setState( ( state ) => ( { ...state, secretSettingsOpenState: !state.secretSettingsOpenState } ) );
+    let count = state.secretSettingsOpenState;
+    //@ts-ignore - The state of this number is set on App.tsx and is not a string.
+    count !== 5 ? setState( ( state ) => ( { ...state, secretSettingsOpenState: count + 1 } ) ) : setState( ( state ) => ( { ...state, secretSettingsOpenState: 0 } ) );
   }
 
   const settingsContainerStyle = {
@@ -58,17 +61,22 @@ const SettingsPanel = ( props: any ) => {
           {/*<TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />*/}
         </div>
         <div
-          className='hiddenSettingsPanel'
+          contentEditable={false}
+          className='hiddenSettingsButton'
           style={{
             height: '30px',
             position: 'fixed',
             bottom: 0,
             right: 0,
             width: '30px',
+            WebkitUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none',
+            userSelect: 'none',
           }}
           onClick={secretSettingsDivHandler}
         />
-        {state.secretSettingsOpenState ? <HiddenSettings /> : null}
+        {state.secretSettingsOpenState === 5 ? <HiddenSettings /> : null}
       </div>
     </Panel>
   )

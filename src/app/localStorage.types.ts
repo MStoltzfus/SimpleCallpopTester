@@ -1,6 +1,7 @@
 interface settingsItems {
   theme: string;
   appMode: number;
+  msAppId?: string;
 }
 
 export interface localStorageSettingsType {
