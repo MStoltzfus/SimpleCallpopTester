@@ -1,7 +1,8 @@
-interface settingsItems {
+export interface settingsItems {
   theme: string;
   appMode: number;
   msAppId?: string;
+  themePalette?: string;
 }
 
 export interface localStorageSettingsType {
@@ -14,5 +15,6 @@ export const defaultLocalStorageSettings: localStorageSettingsType = {
     Settings: {
       theme: "dark",
       appMode: 0,
+      msAppId: 'none set'
     },
   };

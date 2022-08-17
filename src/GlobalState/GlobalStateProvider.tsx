@@ -7,7 +7,7 @@ export interface GlobalStateInterface {
   appThemeState: string;
   settingsPanelOpenState: boolean;
   secretSettingsOpenState: number;
-  appModeState: number;
+  appModeState: number | undefined;
   themePaletteState: palleteItemTypes;
   msAppIdState?: string;
 }

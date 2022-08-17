@@ -1,22 +1,17 @@
-import { Toggle, TextField, DefaultButton } from '@fluentui/react';
+import { useRef, useCallback } from 'react';
+import { Toggle, TextField, DefaultButton, ComboBox, IComboBox, IComboBoxOption, IComboBoxStyles, SelectableOptionMenuItemType } from '@fluentui/react';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
+import { useSettingsChange, useModeChange } from '../customHooks';
+import { modeDefinitions } from '../Pages/Pages';
 import utils from '../utils';
+
 
 const HiddenSettings = ( props: any ) => {
 
   const { state, setState } = useGlobalState();
 
-  const modeToggleSwitchHandler = () => {
-    if ( state.appModeState === 0 ) {
-      let updatedState: number = 1;
-      setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
-      utils.localStorageSetter( "appMode", updatedState );
-    } else {
-      let updatedState: number = 0;
-      setState( ( state ) => ( { ...state, appModeState: updatedState } ) );
-      utils.localStorageSetter( "appMode", updatedState );
-    }
-  };
+  const comboBoxRef = useRef<IComboBox>( null );
+  const onOpenClick = useCallback( () => comboBoxRef.current?.focus( true ), [] );
 
   const modeInputHandler = ( foo: any ) => {
     let newValue = Number( foo );
@@ -35,30 +30,38 @@ const HiddenSettings = ( props: any ) => {
 
   const settingsListItemStyle = {
     display: "grid",
+    padding: 8,
   }
 
   return (
     <div>
       <div className="secretSettingsContent" style={settingsContainerStyle}>
         <h3>Top-Secret Settings</h3>
-        <div style={settingsListItemStyle}>
-          <Toggle
-            label="Coming Soon - App Mode"
-            defaultChecked={utils.localStorageGetter().appMode === 0 ? false : true}
-            offText="Simple Mode"
-            onText="Outlook Contact Mode"
-            onChange={() => modeToggleSwitchHandler()}
-          />
-        </div>
-        <div style={{ marginTop: -5, display: "grid", maxWidth: 80 }}>
+        {/*<div style={{ marginTop: -5, display: "grid", maxWidth: 80 }}>
           <TextField
             label="App Mode"
             defaultValue={utils.localStorageGetter().appMode}
-            onChange={( error, newValue ) => modeInputHandler( newValue )}
+            onChange={( event, newValue ) => modeInputHandler( newValue )}
+          />
+        </div>*/}
+        <div style={{ display: "grid", maxWidth: '75%' }}>
+          <ComboBox
+            componentRef={comboBoxRef}
+            defaultSelectedKey={utils.localStorageGetter().appMode}
+            label="App Mode"
+            options={[
+              { key: modeDefinitions.simpleGenerator, text: 'Basic' },
+              { key: modeDefinitions.outlookContactsConnector, text: 'Outlook Contacts' },
+              { key: modeDefinitions.errorComponentTest, text: 'Error Test' },
+            ]}
+            onItemClick={( event: React.FormEvent<IComboBox>, option?: IComboBoxOption ) => { modeInputHandler( option?.key ) }}
           />
         </div>
         <div style={settingsListItemStyle}>
           <TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />
+        </div>
+        <div style={settingsListItemStyle}>
+          <button style={{ height: 30, width: '75%' }} onClick={useSettingsChange( 'theme' )}>Setting Test Button</button>
         </div>
         <div style={settingsListItemStyle}>
           <DefaultButton

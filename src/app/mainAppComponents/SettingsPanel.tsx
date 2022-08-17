@@ -3,24 +3,11 @@ import { Toggle, Panel } from '@fluentui/react';
 import HiddenSettings from './HiddenSettings';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import utils from '../utils';
+import { useSettingsChange } from '../customHooks';
 
 const SettingsPanel = ( props: any ) => {
 
   const { state, setState } = useGlobalState();
-
-
-  const themeToggleSwitchHandler = () => {
-    if ( state.appThemeState === "dark" ) {
-      let updatedState: string = "light";
-      setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
-      utils.localStorageSetter( "theme", updatedState );
-    } else {
-      let updatedState: string = "dark";
-      setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
-      utils.localStorageSetter( "theme", updatedState );
-    }
-    window.location.reload();
-  };
 
   const secretSettingsDivHandler = () => {
     let count = state.secretSettingsOpenState;
@@ -54,7 +41,7 @@ const SettingsPanel = ( props: any ) => {
             defaultChecked={utils.localStorageGetter().theme === 'dark' ? false : true}
             offText="🌒 Mode"
             onText="🔆 Mode"
-            onChange={() => themeToggleSwitchHandler()}
+            onChange={useSettingsChange('theme')}
           />
         </div>
         <div style={settingsListItemStyle}>
