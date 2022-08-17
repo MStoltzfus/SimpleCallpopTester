@@ -1,4 +1,4 @@
-import { TooltipHost, IconButton, IIconProps, initializeIcons } from '@fluentui/react';
+import { TooltipHost, IconButton, IIconProps } from '@fluentui/react';
 import { useId } from '@fluentui/react-hooks';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import SettingsPanel from './SettingsPanel';
@@ -16,7 +16,6 @@ export const SettingsButton = ( props: any ) => {
     }
 
   }
-  initializeIcons(); // Initialize icons in case this example uses them
   const settingsIcon: IIconProps = { iconName: 'CollapseMenu' };
 
   const tooltipId = useId( 'tooltip' );

@@ -6,7 +6,7 @@ import { palleteItemTypes } from '../app/themes.types';
 export interface GlobalStateInterface {
   appThemeState: string;
   settingsPanelOpenState: boolean;
-  secretSettingsOpenState: number;
+  secretSettingsOpenState: boolean;
   appModeState: number | undefined;
   themePaletteState: palleteItemTypes;
   msAppIdState?: string;

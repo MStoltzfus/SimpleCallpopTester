@@ -19,7 +19,7 @@ export const App: React.FunctionComponent = () => {
       ...state,
       appThemeState: initSettings.theme,
       settingsPanelOpenState: false,
-      secretSettingsOpenState: 0,
+      secretSettingsOpenState: false,
       appModeState: initSettings.appMode,
       themePaletteState: initSettings.theme === "dark" ? themes.dark.palette : themes.light.palette,
     } );

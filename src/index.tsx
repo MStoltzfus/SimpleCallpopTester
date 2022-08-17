@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './app/App';
-import { mergeStyles } from '@fluentui/react';
+import { mergeStyles, initializeIcons } from '@fluentui/react';
 import { GlobalStateProvider } from './GlobalState/GlobalStateProvider';
 import utils from './app/utils';
 
@@ -17,6 +17,7 @@ mergeStyles( {
 } );
 
 utils.localStorageDefaultsSetter(); //Set the default values for the local storage
+initializeIcons(); // Initialize icons in case this example uses them
 
 ReactDOM.render(
   <GlobalStateProvider>

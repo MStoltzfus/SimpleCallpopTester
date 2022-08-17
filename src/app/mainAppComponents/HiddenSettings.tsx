@@ -4,6 +4,7 @@ import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import { useSettingsChange, useModeChange } from '../customHooks';
 import { modeDefinitions } from '../Pages/Pages';
 import utils from '../utils';
+import { CloseSecretSettingsButton } from './CloseSecretSettingsButton';
 
 
 const HiddenSettings = ( props: any ) => {
@@ -36,7 +37,10 @@ const HiddenSettings = ( props: any ) => {
   return (
     <div>
       <div className="secretSettingsContent" style={settingsContainerStyle}>
-        <h3>Top-Secret Settings</h3>
+        <div className='SecretSettingsHeader' style={{ display: 'flex', placeContent: 'space-between', alignItems: 'center' }}>
+          <h3 style={{ display: 'inline-flex' }}>Top-Secret Settings</h3>
+          <CloseSecretSettingsButton />
+        </div>
         {/*<div style={{ marginTop: -5, display: "grid", maxWidth: 80 }}>
           <TextField
             label="App Mode"
@@ -62,12 +66,6 @@ const HiddenSettings = ( props: any ) => {
         </div>
         <div style={settingsListItemStyle}>
           <button style={{ height: 30, width: '75%' }} onClick={useSettingsChange( 'theme' )}>Setting Test Button</button>
-        </div>
-        <div style={settingsListItemStyle}>
-          <DefaultButton
-            text='Hide Secret Settings'
-            onClick={() => setState( ( state ) => ( { ...state, secretSettingsOpenState: 0 } ) )}
-          />
         </div>
       </div>
     </div>
