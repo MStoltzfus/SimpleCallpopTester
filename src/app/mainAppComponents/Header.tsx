@@ -8,7 +8,8 @@ export const Header = ( props: any ) => {
   const { globalState } = useGlobalState();
 
   return (
-    <ThemeProvider applyTo={"element"} theme={themes.header}>
+    <header>
+      <ThemeProvider applyTo={"element"} theme={themes.header}>
         <Stack horizontal horizontalAlign="space-between" styles={globalState.appThemeState === "dark" ? headerStackStyles.darkTheme : headerStackStyles.lightTheme}>
           <span style={headerItemStyles}></span>
           <div style={headerItemStyles}>
@@ -18,6 +19,7 @@ export const Header = ( props: any ) => {
             <SettingsButton />
           </span>
         </Stack>
-    </ThemeProvider>
+      </ThemeProvider>
+    </header >
   );
 };

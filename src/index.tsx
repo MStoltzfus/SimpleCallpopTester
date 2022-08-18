@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Providers } from '@microsoft/mgt-element';
+import { Msal2Provider } from '@microsoft/mgt-msal2-provider';
 import { App } from './app/App';
 import { mergeStyles, initializeIcons } from '@fluentui/react';
 import { GlobalStateProvider } from './GlobalState/GlobalStateProvider';
 import utils from './app/utils';
 
 //import reportWebVitals from './reportWebVitals';
+
+const localsettings = utils.localStorageGetter();
+const msAppId = localsettings.msAppId;
+
+Providers.globalProvider = new Msal2Provider({
+  clientId: msAppId,
+});
 
 // Inject some global styles
 mergeStyles( {
