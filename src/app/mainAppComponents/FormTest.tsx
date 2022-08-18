@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
-import { TextField, DefaultButton } from "@fluentui/react";
+import { TextField, DefaultButton, Separator } from "@fluentui/react";
 import utils from '../utils';
 
 
@@ -9,11 +9,11 @@ export const MsAppIdForm = () => {
     const { globalState, setGlobalState } = useGlobalState();
 
     const onInputChange = useCallback(
-        (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
-            setMsAppIdInput(newValue || '');
+        ( event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string ) => {
+            setMsAppIdInput( newValue || '' );
         },
         [],
-      );
+    );
 
     const handleSubmit = ( e: { preventDefault: () => void; } ) => {
         e.preventDefault();
@@ -23,9 +23,9 @@ export const MsAppIdForm = () => {
     }
 
     return (
-        <div>
+        <div style={{paddingTop:'2px', paddingBottom:'10px', borderTop:'1px solid whitesmoke', borderBottom:'1px solid whitesmoke'}}>
             <form className='msAppIdForm' onSubmit={handleSubmit}>
-                <div className='form-control'>
+                <div className='form-control' style={{ marginBottom: '15px' }}>
                     <TextField
                         label='Microsoft App ID'
                         type='text'
@@ -33,6 +33,7 @@ export const MsAppIdForm = () => {
                         name='msAppIdInput'
                         value={msAppIdInput}
                         onChange={onInputChange}
+                        placeholder={globalState.msAppIdState}
                     />
                 </div>
                 <DefaultButton type='submit' text="Apply" />

@@ -47,7 +47,7 @@ export const App: React.FunctionComponent = () => {
               return <OutlookContactsConnector />;
             case modeDefinitions.errorComponentTest:
               return <Error
-                errorMessage='Just a handy hack to test the error component 😅'
+                errorMessage='Just a handy way to test the error component 😅'
                 errorCode='HELLOWORLDTEST'
               />;
             default:

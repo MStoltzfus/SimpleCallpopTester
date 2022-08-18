@@ -32,6 +32,7 @@ const HiddenSettings = ( props: any ) => {
   const settingsListItemStyle = {
     display: "grid",
     padding: 8,
+    marginTop: 8,
   }
 
   return (
@@ -48,7 +49,7 @@ const HiddenSettings = ( props: any ) => {
             onChange={( event, newValue ) => modeInputHandler( newValue )}
           />
         </div>*/}
-        <div style={{ display: "grid", maxWidth: '75%' }}>
+        <div className='AppModeSelector' style={{ display: "grid", maxWidth: '75%', marginBottom:'10px' }}>
           <ComboBox
             componentRef={comboBoxRef}
             defaultSelectedKey={utils.localStorageGetter().appMode}
