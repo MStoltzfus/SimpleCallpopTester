@@ -1,22 +1,22 @@
 import { useRef, useCallback } from 'react';
-import { Toggle, TextField, DefaultButton, ComboBox, IComboBox, IComboBoxOption, IComboBoxStyles, SelectableOptionMenuItemType } from '@fluentui/react';
+import { TextField, ComboBox, IComboBox, IComboBoxOption } from '@fluentui/react';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import { useSettingsChange, useModeChange } from '../customHooks';
 import { modeDefinitions } from '../Pages/Pages';
 import utils from '../utils';
 import { CloseSecretSettingsButton } from './CloseSecretSettingsButton';
+import { MsAppIdForm } from './FormTest';
 
 
 const HiddenSettings = ( props: any ) => {
 
-  const { state, setState } = useGlobalState();
+  const { globalState, setGlobalState } = useGlobalState();
 
   const comboBoxRef = useRef<IComboBox>( null );
-  const onOpenClick = useCallback( () => comboBoxRef.current?.focus( true ), [] );
 
   const modeInputHandler = ( foo: any ) => {
     let newValue = Number( foo );
-    setState( ( state ) => ( { ...state, appModeState: newValue } ) );
+    setGlobalState( ( globalState ) => ( { ...globalState, appModeState: newValue } ) );
     utils.localStorageSetter( "appMode", newValue );
   }
 
@@ -61,6 +61,7 @@ const HiddenSettings = ( props: any ) => {
             onItemClick={( event: React.FormEvent<IComboBox>, option?: IComboBoxOption ) => { modeInputHandler( option?.key ) }}
           />
         </div>
+        {globalState.appModeState === 1 ? <MsAppIdForm /> : null}
         <div style={settingsListItemStyle}>
           <TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />
         </div>

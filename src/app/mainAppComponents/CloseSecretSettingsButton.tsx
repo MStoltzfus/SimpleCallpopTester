@@ -5,10 +5,10 @@ import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 
 export const CloseSecretSettingsButton = ( props: any ) => {
 
-  const { state, setState } = useGlobalState();
+  const { globalState, setGlobalState } = useGlobalState();
 
   const settingsButtonHandler = () => {
-    setState( ( state ) => ( { ...state, secretSettingsOpenState: !state.secretSettingsOpenState } ) );
+    setGlobalState( ( globalState ) => ( { ...globalState, secretSettingsOpenState: !globalState.secretSettingsOpenState } ) );
   }
   const closeSecSettingsIcon: IIconProps = { iconName: 'ChromeClose' };
 

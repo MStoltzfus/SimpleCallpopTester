@@ -5,9 +5,10 @@ import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import utils from '../utils';
 import { useSettingsChange } from '../customHooks';
 
+
 const SettingsPanel = ( props: any ) => {
 
-  const { state, setState } = useGlobalState();
+  const { globalState, setGlobalState } = useGlobalState();
   const secretSettingsRef = useRef( 0 ); //look at us using a ref to cut down on unnecessary re-renders!!!
 
   const secretSettingsDivHandler = () => { //this is the furthest thing from a pure function, but we're throwing stuff together rn 🤷‍♂️🤷‍♂️
@@ -17,8 +18,8 @@ const SettingsPanel = ( props: any ) => {
       secretSettingsRef.current = 0;
     }
     secretSettingsRef.current === 5 ?
-      setState( ( state ) => ( { ...state, secretSettingsOpenState: true } ) ) :
-      setState( ( state ) => ( { ...state, secretSettingsOpenState: false } ) );
+    setGlobalState( ( globalState ) => ( { ...globalState, secretSettingsOpenState: true } ) ) :
+    setGlobalState( ( globalState ) => ( { ...globalState, secretSettingsOpenState: false } ) );
   }
 
   const settingsContainerStyle = {
@@ -35,8 +36,8 @@ const SettingsPanel = ( props: any ) => {
     <Panel
       headerText="Settings"
       isLightDismiss={true}
-      isOpen={state.settingsPanelOpenState}
-      onDismiss={() => setState( ( state ) => ( { ...state, settingsPanelOpenState: !state.settingsPanelOpenState } ) )}
+      isOpen={globalState.settingsPanelOpenState}
+      onDismiss={() => setGlobalState( ( globalState ) => ( { ...globalState, settingsPanelOpenState: !globalState.settingsPanelOpenState } ) )}
       closeButtonAriaLabel="Close"
     >
       <div className="settingsPanelContent" style={settingsContainerStyle}>
@@ -66,7 +67,7 @@ const SettingsPanel = ( props: any ) => {
           }}
           onClick={secretSettingsDivHandler}
         />
-        {state.secretSettingsOpenState ? <HiddenSettings /> : null}
+        {globalState.secretSettingsOpenState ? <HiddenSettings /> : null}
       </div>
     </Panel>
   )

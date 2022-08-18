@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useGlobalState, GlobalStateInterface } from "../GlobalState/GlobalStateProvider";
 import utils from "./utils";
 import { settingsItems } from './localStorage.types';
@@ -5,37 +6,42 @@ import { settingsItems } from './localStorage.types';
 
 const useSettingsChange = ( setting: keyof settingsItems, value?: number | string | undefined ) => {
 
-    const { state, setState } = useGlobalState();
+    const { globalState, setGlobalState } = useGlobalState();
 
     const themeChangeHandler = () => {
-        if ( state.appThemeState === "dark" ) {
+        if ( globalState.appThemeState === "dark" ) {
             let updatedState: string = "light";
-            setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
+            setGlobalState( ( globalState ) => ( { ...globalState, appThemeState: updatedState } ) );
             utils.localStorageSetter( "theme", updatedState );
         } else {
             let updatedState: string = "dark";
-            setState( ( state ) => ( { ...state, appThemeState: updatedState } ) );
+            setGlobalState( ( globalState ) => ( { ...globalState, appThemeState: updatedState } ) );
             utils.localStorageSetter( "theme", updatedState );
         }
     }
 
     const modeChangeHandler = ( input: number | string | undefined ) => {
         let newValue = Number( input );
-        setState( ( state ) => ( { ...state, appModeState: newValue } ) );
+        setGlobalState( ( globalState ) => ( { ...globalState, appModeState: newValue } ) );
         utils.localStorageSetter( "appMode", newValue );
-      }
+    }
 
-    return (value:any) => {
+    const msAppIdChangeHandler = ( input: string ) => {
+        let newValue = input;
+        setGlobalState( ( globalState ) => ( { ...globalState, msAppIdState: newValue } ) );
+        utils.localStorageSetter( "msAppId", newValue );
+    }
+
+    return ( value: any ) => {
         switch ( setting ) {
             case 'theme':
                 themeChangeHandler();
                 break;
-
             case 'appMode':
                 modeChangeHandler( value );
                 break;
             case 'msAppId':
-
+                msAppIdChangeHandler( value );
                 break;
             case 'themePalette':
 
@@ -46,17 +52,21 @@ const useSettingsChange = ( setting: keyof settingsItems, value?: number | strin
 
 const useModeChange = ( value: number | string | undefined ) => {
 
-    const { state, setState } = useGlobalState();
+    const { globalState, setGlobalState } = useGlobalState();
 
     const modeChangeHandler = ( input: number | string | undefined ) => {
         let newValue = Number( input );
-        setState( ( state ) => ( { ...state, appModeState: newValue } ) );
+        setGlobalState( ( globalState ) => ( { ...globalState, appModeState: newValue } ) );
         utils.localStorageSetter( "appMode", newValue );
-      }
+    }
 
-    return (value:any) => {
+    return ( value: any ) => {
         modeChangeHandler( value );
     }
 }
 
-export { useSettingsChange, useModeChange };
+export {
+    useSettingsChange,
+    useModeChange,
+    
+};

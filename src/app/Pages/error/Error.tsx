@@ -8,9 +8,9 @@ type errorProps = {
 
 const Error = ( props: errorProps ) => {
 
-  const { state } = useGlobalState();
+  const { globalState } = useGlobalState();
 
-  const textColor = state.appThemeState === "dark" ? state.themePaletteState?.neutralPrimary : state.themePaletteState?.themeLight;
+  const textColor = globalState.appThemeState === "dark" ? globalState.themePaletteState?.neutralPrimary : globalState.themePaletteState?.themeLight;
 
   return (
     <div
@@ -22,7 +22,7 @@ const Error = ( props: errorProps ) => {
 
           display: "flex",
           flexDirection: "column",
-          backgroundColor: state.themePaletteState?.themeDarker,
+          backgroundColor: globalState.themePaletteState?.themeDarker,
           maxWidth: "70%",
           margin: 30,
           paddingTop: 15,

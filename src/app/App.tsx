@@ -11,16 +11,17 @@ import { SimpleGenerator, OutlookContactsConnector, Error, modeDefinitions } fro
 
 export const App: React.FunctionComponent = () => {
 
-  const { state, setState } = useGlobalState();
+  const { globalState, setGlobalState } = useGlobalState();
 
   function defaultStateSetter() {
     let initSettings = utils.localStorageGetter();
-    setState( {
-      ...state,
+    setGlobalState( {
+      ...globalState,
       appThemeState: initSettings.theme,
       settingsPanelOpenState: false,
-      secretSettingsOpenState: false,
+      secretSettingsOpenState: process.env.NODE_ENV === 'development' ? true : false,
       appModeState: initSettings.appMode,
+      msAppIdState: initSettings.msAppId,
       themePaletteState: initSettings.theme === "dark" ? themes.dark.palette : themes.light.palette,
     } );
   }
@@ -32,14 +33,14 @@ export const App: React.FunctionComponent = () => {
 
   const appName = utils.isAppNameInUrl(); //Calls the method to check if the app name is in the URL
 
-  console.log( state )
+  console.log( globalState )
 
   return (
-    <ThemeProvider applyTo={"body"} theme={state.appThemeState === "dark" ? themes.dark : themes.light}>
+    <ThemeProvider applyTo={"body"} theme={globalState.appThemeState === "dark" ? themes.dark : themes.light}>
       <div className="App">
         <Header appName={appName} />
         {( () => {
-          switch ( state.appModeState ) {
+          switch ( globalState.appModeState ) {
             case modeDefinitions.simpleGenerator:
               return <SimpleGenerator />;
             case modeDefinitions.outlookContactsConnector:

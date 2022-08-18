@@ -1,5 +1,9 @@
 import { defaultLocalStorageSettings } from "./localStorage.types";
 
+function saveLocalSettings(input: any){
+  localStorage.setItem("Settings", JSON.stringify(input));
+}
+
 const utils = {
   getAllUrlParams(url?: string) {
     //Code from https://www.sitepoint.com/get-url-parameters-with-javascript/
@@ -107,11 +111,15 @@ const utils = {
       switch (settingKey) {
         case "theme":
           settings.theme = settingValue;
-          localStorage.setItem("Settings", JSON.stringify(settings));
+          saveLocalSettings(settings);
           break;
         case "appMode":
           settings.appMode = settingValue;
-          localStorage.setItem("Settings", JSON.stringify(settings));
+          saveLocalSettings(settings);
+          break;
+        case "msAppId":
+          settings.msAppId = settingValue;
+          saveLocalSettings(settings);
           break;
       }
       return console.log("updated settings: ", settings);

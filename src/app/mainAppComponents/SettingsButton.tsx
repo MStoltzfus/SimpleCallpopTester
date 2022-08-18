@@ -6,13 +6,13 @@ import SettingsPanel from './SettingsPanel';
 
 export const SettingsButton = ( props: any ) => {
 
-  const { state, setState } = useGlobalState();
+  const { globalState, setGlobalState } = useGlobalState();
 
   const settingsButtonHandler = () => {
-    if ( state.settingsPanelOpenState === false ) {
-      setState( ( state ) => ( { ...state, settingsPanelOpenState: true } ) );
+    if ( globalState.settingsPanelOpenState === false ) {
+      setGlobalState( ( globalState ) => ( { ...globalState, settingsPanelOpenState: true } ) );
     } else {
-      setState( ( state ) => ( { ...state, settingsPanelOpenState: false } ) );
+      setGlobalState( ( globalState ) => ( { ...globalState, settingsPanelOpenState: false } ) );
     }
 
   }
