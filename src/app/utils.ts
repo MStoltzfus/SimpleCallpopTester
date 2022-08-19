@@ -133,6 +133,10 @@ const utils = {
       timeoutId = setTimeout(() => fn.apply(this, args), delay);
     };
   },
+  isValidMsGuid(str: string) {
+    const regEx = /^[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/
+    return regEx.test(str);
+  },
 };
 
 export default utils;

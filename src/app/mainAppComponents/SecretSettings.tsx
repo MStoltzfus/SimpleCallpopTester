@@ -5,10 +5,10 @@ import { useSettingsChange, useModeChange } from '../customHooks';
 import { modeDefinitions } from '../Pages/Pages';
 import utils from '../utils';
 import { CloseSecretSettingsButton } from './CloseSecretSettingsButton';
-import { MsAppIdForm } from './FormTest';
+import { MsAppIdForm } from './MsAppIdForm';
 
 
-const HiddenSettings = ( props: any ) => {
+const SecretSettings = ( props: any ) => {
 
   const { globalState, setGlobalState } = useGlobalState();
 
@@ -31,8 +31,9 @@ const HiddenSettings = ( props: any ) => {
 
   const settingsListItemStyle = {
     display: "grid",
-    padding: 8,
-    marginTop: 8,
+    paddingTop: 8,
+    paddingBottom: 5,
+    marginTop: 5,
   }
 
   return (
@@ -49,7 +50,7 @@ const HiddenSettings = ( props: any ) => {
             onChange={( event, newValue ) => modeInputHandler( newValue )}
           />
         </div>*/}
-        <div className='AppModeSelector' style={{ display: "grid", maxWidth: '75%', marginBottom:'10px' }}>
+        <div className='AppModeSelector' style={{ display: "grid", maxWidth: '75%', marginBottom: '10px' }}>
           <ComboBox
             componentRef={comboBoxRef}
             defaultSelectedKey={utils.localStorageGetter().appMode}
@@ -58,11 +59,18 @@ const HiddenSettings = ( props: any ) => {
               { key: modeDefinitions.simpleGenerator, text: 'Basic' },
               { key: modeDefinitions.outlookContactsConnector, text: 'Outlook Contacts' },
               { key: modeDefinitions.errorComponentTest, text: 'Error Test' },
+              { key: modeDefinitions.infoComponentTest, text: 'Info Test' },
             ]}
             onItemClick={( event: React.FormEvent<IComboBox>, option?: IComboBoxOption ) => { modeInputHandler( option?.key ) }}
           />
         </div>
-        {globalState.appModeState === 1 ? <MsAppIdForm /> : null}
+        {globalState.appModeState === 1 ?
+          <div style={settingsListItemStyle}>
+            <div style={{ paddingTop: '2px', paddingBottom: '10px', borderTop: '1px solid whitesmoke', borderBottom: '1px solid whitesmoke' }}>
+              <MsAppIdForm />
+            </div>
+          </div>
+          : null}
         <div style={settingsListItemStyle}>
           <TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />
         </div>
@@ -74,4 +82,4 @@ const HiddenSettings = ( props: any ) => {
   )
 }
 
-export default HiddenSettings
+export default SecretSettings

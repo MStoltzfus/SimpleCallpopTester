@@ -23,7 +23,7 @@ export const MsAppIdForm = () => {
     }
 
     return (
-        <div style={{paddingTop:'2px', paddingBottom:'10px', borderTop:'1px solid whitesmoke', borderBottom:'1px solid whitesmoke'}}>
+        <div>
             <form className='msAppIdForm' onSubmit={handleSubmit}>
                 <div className='form-control' style={{ marginBottom: '15px' }}>
                     <TextField

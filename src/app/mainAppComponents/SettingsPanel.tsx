@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Toggle, Panel } from '@fluentui/react';
-import HiddenSettings from './HiddenSettings';
+import SecretSettings from './SecretSettings';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
 import utils from '../utils';
 import { useSettingsChange } from '../customHooks';
@@ -67,7 +67,7 @@ const SettingsPanel = ( props: any ) => {
           }}
           onClick={secretSettingsDivHandler}
         />
-        {globalState.secretSettingsOpenState ? <HiddenSettings /> : null}
+        {globalState.secretSettingsOpenState ? <SecretSettings /> : null}
       </div>
     </Panel>
   )

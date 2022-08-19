@@ -14,6 +14,7 @@ const msAppId = localsettings.msAppId;
 
 Providers.globalProvider = new Msal2Provider({
   clientId: msAppId,
+  scopes: ['contacts.read.shared', 'user.read', 'openid', 'profile',]
 });
 
 // Inject some global styles

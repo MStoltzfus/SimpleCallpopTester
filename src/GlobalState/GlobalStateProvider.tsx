@@ -9,6 +9,7 @@ export interface GlobalStateInterface {
   secretSettingsOpenState: boolean;
   appModeState: number | undefined;
   themePaletteState: palleteItemTypes;
+  msUserIsSignedInState?: boolean;
   msAppIdState?: string;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
