@@ -9,12 +9,15 @@ import utils from './app/utils';
 
 //import reportWebVitals from './reportWebVitals';
 
+utils.localStorageDefaultsSetter(); //Set the default values for the local storage -- needs to be the first function to run when the app launches
+initializeIcons(); // Initialize icons in case this example uses them
+
 const localsettings = utils.localStorageGetter();
 const msAppId = localsettings.msAppId;
 
 Providers.globalProvider = new Msal2Provider({
   clientId: msAppId,
-  scopes: ['contacts.read.shared', 'user.read', 'openid', 'profile',]
+  scopes: ['contacts.readwrite.shared', 'user.read', 'openid', 'profile',]
 });
 
 // Inject some global styles
@@ -25,9 +28,6 @@ mergeStyles( {
     height: '100vh',
   },
 } );
-
-utils.localStorageDefaultsSetter(); //Set the default values for the local storage
-initializeIcons(); // Initialize icons in case this example uses them
 
 ReactDOM.render(
   <GlobalStateProvider>

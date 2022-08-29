@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalState, GlobalStateInterface } from "../GlobalState/GlobalStateProvider";
 import utils from "./utils";
 import { settingsItems } from './localStorage.types';
+import { Providers, ProviderState } from "@microsoft/mgt-react";
 
 
 const useSettingsChange = ( setting: keyof settingsItems, value?: number | string | undefined ) => {
@@ -65,8 +66,31 @@ const useModeChange = ( value: number | string | undefined ) => {
     }
 }
 
+function useIsSignedIn(): [boolean] {
+
+    const { globalState, setGlobalState } = useGlobalState();
+  
+    useEffect( () => {
+        const updateState = () => {
+            const provider = Providers.globalProvider;
+            let test = provider && provider.state === ProviderState.SignedIn
+            setGlobalState( ( globalState ) => ( { ...globalState, msUserIsSignedInState: test } ) );
+        };
+  
+        Providers.onProviderUpdated( updateState );
+        updateState();
+  
+        return () => {
+            Providers.removeProviderUpdatedListener( updateState );
+          }
+    }, [] );
+    //@ts-ignore
+    return [globalState.msUserIsSignedInState];
+  }
+
 export {
     useSettingsChange,
     useModeChange,
-    
+    useIsSignedIn,
+
 };

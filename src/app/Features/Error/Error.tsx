@@ -3,6 +3,7 @@ import { useGlobalState } from "../../../GlobalState/GlobalStateProvider";
 type errorProps = {
   errorMessage: string;
   errorCode: string;
+  errorMessageExtended?: string;
 }
 
 
@@ -41,6 +42,7 @@ const Error = ( props: errorProps ) => {
           }}
           src='error.png' />
         <h3 className="errorMessage" style={{ color: textColor, width:'75%', textAlign:'center' }}>{props.errorMessage}</h3>
+        <p className="errorMessageExtended" style={{ color: textColor, width: '90%' }}>{props.errorMessageExtended}</p>
         <p className="errorCode" style={{ color: textColor }}>Error Code: {props.errorCode}</p>
       </div>
     </div>

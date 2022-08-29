@@ -1,6 +1,6 @@
 import { TooltipHost, IconButton, IIconProps } from '@fluentui/react';
 import { useId } from '@fluentui/react-hooks';
-import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
+import { useGlobalState } from '../../../GlobalState/GlobalStateProvider';
 import SettingsPanel from './SettingsPanel';
 
 

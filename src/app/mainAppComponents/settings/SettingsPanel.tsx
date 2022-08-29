@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { Toggle, Panel } from '@fluentui/react';
 import SecretSettings from './SecretSettings';
-import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
-import utils from '../utils';
-import { useSettingsChange } from '../customHooks';
+import { useGlobalState } from '../../../GlobalState/GlobalStateProvider';
+import utils from '../../utils';
+import { useSettingsChange } from '../../customHooks';
 
 
 const SettingsPanel = ( props: any ) => {

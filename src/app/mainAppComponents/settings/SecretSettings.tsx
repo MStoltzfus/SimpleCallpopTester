@@ -1,12 +1,14 @@
 import { useRef, useCallback } from 'react';
 import { TextField, ComboBox, IComboBox, IComboBoxOption } from '@fluentui/react';
-import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
-import { useSettingsChange, useModeChange } from '../customHooks';
-import { modeDefinitions } from '../Pages/Pages';
-import utils from '../utils';
+import { useGlobalState } from '../../../GlobalState/GlobalStateProvider';
+import { useSettingsChange, useModeChange } from '../../customHooks';
+import { modeDefinitions } from '../../Features/Features';
+import utils from '../../utils';
 import { CloseSecretSettingsButton } from './CloseSecretSettingsButton';
-import { MsAppIdForm } from './MsAppIdForm';
+import { MsAppIdForm } from '../../sharedComponents/MsAppIdForm';
 
+//@ts-ignore
+const tempV = import.meta.env
 
 const SecretSettings = ( props: any ) => {
 
@@ -56,10 +58,11 @@ const SecretSettings = ( props: any ) => {
             defaultSelectedKey={utils.localStorageGetter().appMode}
             label="App Mode"
             options={[
-              { key: modeDefinitions.simpleGenerator, text: 'Basic' },
-              { key: modeDefinitions.outlookContactsConnector, text: 'Outlook Contacts' },
-              { key: modeDefinitions.errorComponentTest, text: 'Error Test' },
-              { key: modeDefinitions.infoComponentTest, text: 'Info Test' },
+              { key: modeDefinitions.simpleGenerator, text: '1. Basic Param Tester' },
+              { key: modeDefinitions.outlookContactsConnector, text: '2. Outlook Contacts' },
+              { key: modeDefinitions.errorComponentTest, text: '3. Error Test' },
+              { key: modeDefinitions.infoComponentTest, text: '4. Info Test' },
+              { key: modeDefinitions.smsComponent, text: '4. SMS' },
             ]}
             onItemClick={( event: React.FormEvent<IComboBox>, option?: IComboBoxOption ) => { modeInputHandler( option?.key ) }}
           />
@@ -76,6 +79,7 @@ const SecretSettings = ( props: any ) => {
         </div>
         <div style={settingsListItemStyle}>
           <button style={{ height: 30, width: '75%' }} onClick={useSettingsChange( 'theme' )}>Setting Test Button</button>
+          <button style={{ height: 30, width: '75%' }} onClick={() => console.log(tempV)}>Env Vars Test Button</button>
         </div>
       </div>
     </div>

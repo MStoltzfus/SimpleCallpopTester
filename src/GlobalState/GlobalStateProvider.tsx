@@ -55,6 +55,6 @@ To provide the state to your entire React app -
 3. Then, to consume and set the state in any component, just add "import { useGlobalState } from './GlobalStateProvider';"...
 4. And add "const { globalState, setGlobalState } = useGlobalState();" within the component's function.
 5. Consume the state by using "state.property1", etc. as the variable.
-6. Set the state by using the "setState( ( state ) => ( { ...state, property1: "foo" } ) );" format.
+6. Set the state by using the "setGlobalState( ( state ) => ( { ...state, property1: "foo" } ) );" format.
     
 */

@@ -1,7 +1,7 @@
 import { Stack, Text, ThemeProvider } from '@fluentui/react';
 import { headerStackStyles, headerItemStyles } from '../styles';
 import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
-import { SettingsButton } from './SettingsButton';
+import { SettingsButton } from './settings/SettingsButton';
 import themes from '../themes';
 
 export const Header = ( props: any ) => {
