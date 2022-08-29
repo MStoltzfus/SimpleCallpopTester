@@ -1,0 +1,37 @@
+import utils from "../../utils";
+import { Providers } from '@microsoft/mgt-react'
+import { useIsSignedIn } from "../../customHooks";
+
+
+
+const provider = Providers.globalProvider;
+const graphClient = provider.graph.client;
+
+export const msGraphReq = {
+    simple: async ( endpoint: string ) => {
+        if ( provider ) {
+            let res = await graphClient
+            .api( endpoint )
+            .get();
+            return res;
+        }
+    },
+    filtered: async ( endpoint: string, filterCondition: string ) => {
+        if ( provider ) {
+            let res = await graphClient
+            .api( endpoint )
+            .filter(filterCondition)
+            .get();
+            return res;
+        }
+    },
+    select: async ( endpoint: string, selectCondition:string ) => {
+        if ( provider ) {
+            let res = await graphClient
+            .api( endpoint )
+            .select(selectCondition)
+            .get();
+            return res;
+        }
+    },
+}

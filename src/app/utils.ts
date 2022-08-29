@@ -1,4 +1,9 @@
-import { defaultLocalStorageSettings } from "../localStorage.types";
+import { defaultLocalStorageSettings } from "./localStorage.types";
+import { Providers, ProviderState } from "@microsoft/mgt-react";
+
+function saveLocalSettings(input: any) {
+  localStorage.setItem("Settings", JSON.stringify(input));
+}
 
 const utils = {
   getAllUrlParams(url?: string) {
@@ -87,10 +92,11 @@ const utils = {
     if (settings !== null) {
       let parsedSettings = JSON.parse(settings);
       return parsedSettings;
+    } else {
+      console.error(
+        "No settings found in local storage - THIS SHOULDN'T HAPPEN"
+      );
     }
-    return console.error(
-      "No settings found in local storage - THIS SHOULDN'T HAPPEN"
-    );
   },
   localStorageDefaultsSetter() {
     let settings = localStorage.getItem("Settings");
@@ -107,23 +113,43 @@ const utils = {
       switch (settingKey) {
         case "theme":
           settings.theme = settingValue;
-          localStorage.setItem("Settings", JSON.stringify(settings));
+          saveLocalSettings(settings);
           break;
         case "appMode":
           settings.appMode = settingValue;
-          localStorage.setItem("Settings", JSON.stringify(settings));
+          saveLocalSettings(settings);
+          break;
+        case "msAppId":
+          settings.msAppId = settingValue;
+          saveLocalSettings(settings);
           break;
       }
       return console.log("updated settings: ", settings);
     }
     return console.error("settings storage error");
   },
-  debounce(fn: Function, delay: number) {
-    let timeoutId: ReturnType<typeof setTimeout>;
-    return function (this: any, ...args: any[]) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  isValidMsGuid(str: string) {
+    const regEx =
+      /^[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/;
+    return regEx.test(str);
+  },
+  debounce: <T extends (...args: any[]) => ReturnType<T>>(
+    callback: T,
+    timeout: number
+  ): ((...args: Parameters<T>) => void) => {
+    let timer: ReturnType<typeof setTimeout>;
+    return (...args: Parameters<T>) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        callback(...args);
+      }, timeout);
     };
+  },
+  async getMsalToken() {
+    if (Providers.globalProvider.state === ProviderState.SignedIn) {
+      const token = await Providers.globalProvider.getAccessToken({scopes: ['User.Read']})
+      return token
+    }
   },
 };
 

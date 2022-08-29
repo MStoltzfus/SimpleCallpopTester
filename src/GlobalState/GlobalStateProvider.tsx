@@ -3,18 +3,20 @@ import { palleteItemTypes } from '../app/themes.types';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // \/ Add any new state values to the interface here \/
-interface GlobalStateInterface {
+export interface GlobalStateInterface {
   appThemeState: string;
   settingsPanelOpenState: boolean;
   secretSettingsOpenState: boolean;
-  appModeState: number;
+  appModeState: number | undefined;
   themePaletteState: palleteItemTypes;
+  msUserIsSignedInState?: boolean;
+  msAppIdState?: string;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const GlobalStateContext = createContext( {
-  state: {} as Partial<GlobalStateInterface>,
-  setState: {} as Dispatch<SetStateAction<Partial<GlobalStateInterface>>>,
+  globalState: {} as Partial<GlobalStateInterface>,
+  setGlobalState: {} as Dispatch<SetStateAction<Partial<GlobalStateInterface>>>,
 } );
 
 const GlobalStateProvider = ( {
@@ -24,9 +26,9 @@ const GlobalStateProvider = ( {
   children: React.ReactNode;
   value?: Partial<GlobalStateInterface>;
 } ) => {
-  const [state, setState] = useState( value );
+  const [globalState, setGlobalState] = useState( value );
   return (
-    <GlobalStateContext.Provider value={{ state, setState }}>
+    <GlobalStateContext.Provider value={{ globalState, setGlobalState }}>
       {children}
     </GlobalStateContext.Provider>
   );
@@ -41,3 +43,18 @@ const useGlobalState = () => {
 };
 
 export { GlobalStateProvider, useGlobalState };
+
+/*
+    
+To provide the state to your entire React app - 
+1. Add "import { GlobalStateProvider } from './GlobalStateProvider';" in your app entry (either main.tsx or index.tsx)
+2. Wrap the app content with...
+    <GlobalStateProvider>
+      <App />
+    </GlobalStateProvider>
+3. Then, to consume and set the state in any component, just add "import { useGlobalState } from './GlobalStateProvider';"...
+4. And add "const { globalState, setGlobalState } = useGlobalState();" within the component's function.
+5. Consume the state by using "state.property1", etc. as the variable.
+6. Set the state by using the "setGlobalState( ( state ) => ( { ...state, property1: "foo" } ) );" format.
+    
+*/

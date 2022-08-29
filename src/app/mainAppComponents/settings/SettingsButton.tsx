@@ -1,22 +1,21 @@
-import { TooltipHost, IconButton, IIconProps, initializeIcons } from '@fluentui/react';
+import { TooltipHost, IconButton, IIconProps } from '@fluentui/react';
 import { useId } from '@fluentui/react-hooks';
-import { useGlobalState } from '../../GlobalState/GlobalStateProvider';
+import { useGlobalState } from '../../../GlobalState/GlobalStateProvider';
 import SettingsPanel from './SettingsPanel';
 
 
 export const SettingsButton = ( props: any ) => {
 
-  const { state, setState } = useGlobalState();
+  const { globalState, setGlobalState } = useGlobalState();
 
   const settingsButtonHandler = () => {
-    if ( state.settingsPanelOpenState === false ) {
-      setState( ( state ) => ( { ...state, settingsPanelOpenState: true } ) );
+    if ( globalState.settingsPanelOpenState === false ) {
+      setGlobalState( ( globalState ) => ( { ...globalState, settingsPanelOpenState: true } ) );
     } else {
-      setState( ( state ) => ( { ...state, settingsPanelOpenState: false } ) );
+      setGlobalState( ( globalState ) => ( { ...globalState, settingsPanelOpenState: false } ) );
     }
 
   }
-  initializeIcons(); // Initialize icons in case this example uses them
   const settingsIcon: IIconProps = { iconName: 'CollapseMenu' };
 
   const tooltipId = useId( 'tooltip' );

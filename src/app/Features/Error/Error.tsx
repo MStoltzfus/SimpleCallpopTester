@@ -3,14 +3,15 @@ import { useGlobalState } from "../../../GlobalState/GlobalStateProvider";
 type errorProps = {
   errorMessage: string;
   errorCode: string;
+  errorMessageExtended?: string;
 }
 
 
 const Error = ( props: errorProps ) => {
 
-  const { state } = useGlobalState();
+  const { globalState } = useGlobalState();
 
-  const textColor = state.appThemeState === "dark" ? state.themePaletteState?.neutralPrimary : state.themePaletteState?.themeLight;
+  const textColor = globalState.appThemeState === "dark" ? globalState.themePaletteState?.neutralPrimary : globalState.themePaletteState?.themeLight;
 
   return (
     <div
@@ -22,7 +23,7 @@ const Error = ( props: errorProps ) => {
 
           display: "flex",
           flexDirection: "column",
-          backgroundColor: state.themePaletteState?.themeDarker,
+          backgroundColor: globalState.themePaletteState?.themeDarker,
           maxWidth: "70%",
           margin: 30,
           paddingTop: 15,
@@ -41,6 +42,7 @@ const Error = ( props: errorProps ) => {
           }}
           src='error.png' />
         <h3 className="errorMessage" style={{ color: textColor, width:'75%', textAlign:'center' }}>{props.errorMessage}</h3>
+        <p className="errorMessageExtended" style={{ color: textColor, width: '90%' }}>{props.errorMessageExtended}</p>
         <p className="errorCode" style={{ color: textColor }}>Error Code: {props.errorCode}</p>
       </div>
     </div>
