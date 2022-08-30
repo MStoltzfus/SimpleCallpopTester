@@ -73,7 +73,7 @@ const SmsComponent: React.FunctionComponent = () => {
               name='numberInput'
               value={numberInput}
               onChange={onNumberInputChange}
-              placeholder={numberInput}
+              placeholder={numberInput.length === 0 ? 'Enter a Mobile Number Here' : numberInput}
             />
             <TextField
               label='Message'
