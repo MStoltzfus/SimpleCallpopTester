@@ -10,7 +10,8 @@ export interface GlobalStateInterface {
   appModeState: number | undefined;
   themePaletteState: palleteItemTypes;
   msUserIsSignedInState?: boolean;
-  msAppIdState?: string;
+  msAppIdState?: string;  //unneeded in state for now
+  numberNormalizationRuleState?: string; //unneeded in state for now
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

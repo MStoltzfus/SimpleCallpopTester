@@ -2,7 +2,7 @@ import { DefaultButton, ISearchBoxStyles, TextField } from '@fluentui/react';
 import { mainContentStyle } from '../../styles'; // import the styles from the styles file
 import utils from '../../utils';
 import { UnderConstructionHeader } from '../../sharedComponents/UnderConstructionHeader';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useGlobalState } from '../../../GlobalState/GlobalStateProvider';
 import { sendSms } from './acsApiUtils';
 
@@ -11,26 +11,37 @@ export const searchBoxStyles: Partial<ISearchBoxStyles> = { root: { width: 200 }
 const SmsComponent: React.FunctionComponent = () => {
 
   const [messageInput, setMessageInput] = useState( '' );
-  //const { globalState, setGlobalState } = useGlobalState();
+  const [numberInput, setNumberInput] = useState( '' );
 
-  let params = new URLSearchParams(document.location.search);
-  let number = '+' + params.get('callernumber');
+  let params = new URLSearchParams( document.location.search );
+  let number = params.get( 'callernumber' );
 
-  console.log(number)
+  useEffect( () => {
+    if (number !== null || undefined) {
+      //@ts-ignore
+      setNumberInput(number); 
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [] );
 
-  const onInputChange = useCallback(
+  const onMessageInputChange = useCallback(
     ( event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string ) => {
       setMessageInput( newValue || '' );
     },
     [],
   );
 
+  const onNumberInputChange = useCallback(
+    ( event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string ) => {
+      setNumberInput( newValue || '' );
+    },
+    [],
+  );
+
   const handleSubmit = ( e: { preventDefault: () => void; } ) => {
     e.preventDefault();
-    sendSms(number, messageInput)
+    sendSms( numberInput, messageInput )
   }
-
-  console.log(params)
 
   return (
     <>
@@ -52,16 +63,26 @@ const SmsComponent: React.FunctionComponent = () => {
           }}>
           <h3>ACS SMS Tester</h3>
         </div>
-        <p style={{width:'75%'}}>This App Mode lets you send a text to the "callernumber" parameter taken from the callpop URL</p>
-        <form className='msAppIdForm' onSubmit={handleSubmit}>
-          <div className='form-control' style={{ width: '100%', paddingBottom:'1rem'}}>
+        <p style={{ width: '75%' }}>This App Mode lets you send a text to the "callernumber" parameter taken from the callpop URL</p>
+        <form className='messageInputForm' onSubmit={handleSubmit}>
+          <div className='form-control' style={{ width: '100%', paddingBottom: '1rem' }}>
+          <TextField
+              label='Number'
+              type='text'
+              id='numberInput'
+              name='numberInput'
+              value={numberInput}
+              onChange={onNumberInputChange}
+              placeholder={numberInput.length === 0 ? 'Enter a Mobile Number Here' : numberInput}
+            />
             <TextField
               label='Message'
               type='text'
               id='messageInput'
               name='messageInput'
+              multiline rows={10}
               value={messageInput}
-              onChange={onInputChange}
+              onChange={onMessageInputChange}
               placeholder='Enter Your Message Here'
             />
           </div>

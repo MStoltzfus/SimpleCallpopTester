@@ -17,7 +17,6 @@ export const MsAppIdForm = () => {
 
     const handleSubmit = ( e: { preventDefault: () => void; } ) => {
         e.preventDefault();
-        setGlobalState( ( globalState ) => ( { ...globalState, msAppIdState: msAppIdInput } ) );
         utils.localStorageSetter( "msAppId", msAppIdInput );
     }
 

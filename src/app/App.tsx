@@ -30,14 +30,12 @@ export const App: React.FunctionComponent = () => {
       secretSettingsOpenState: import.meta.env.MODE === 'development' ? true : false,
       appModeState: initSettings.appMode,
       msUserIsSignedInState: provider && provider.state === ProviderState.SignedIn,
-      msAppIdState: initSettings.msAppId,
       themePaletteState: initSettings.theme === "dark" ? themes.dark.palette : themes.light.palette,
     } );
   }
 
   useEffect( () => {
     defaultStateSetter();
-    console.log( globalState.msUserIsSignedInState )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
