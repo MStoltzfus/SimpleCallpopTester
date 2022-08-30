@@ -123,6 +123,12 @@ const utils = {
           settings.msAppId = settingValue;
           saveLocalSettings(settings);
           break;
+        case "numberNormalizationRule":
+          settings.numberNormalizationRule = settingValue
+          saveLocalSettings(settings);
+          break;
+        default:
+          alert('invalid setting')
       }
       return console.log("updated settings: ", settings);
     }

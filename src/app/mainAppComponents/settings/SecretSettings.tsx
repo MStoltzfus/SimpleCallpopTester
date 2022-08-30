@@ -6,6 +6,7 @@ import { modeDefinitions } from '../../Features/Features';
 import utils from '../../utils';
 import { CloseSecretSettingsButton } from './CloseSecretSettingsButton';
 import { MsAppIdForm } from '../../sharedComponents/MsAppIdForm';
+import { PhoneRegexForm } from './PhoneRegExForm';
 
 //@ts-ignore
 const tempV = import.meta.env
@@ -45,13 +46,6 @@ const SecretSettings = ( props: any ) => {
           <h3 style={{ display: 'inline-flex' }}>Top-Secret Settings</h3>
           <CloseSecretSettingsButton />
         </div>
-        {/*<div style={{ marginTop: -5, display: "grid", maxWidth: 80 }}>
-          <TextField
-            label="App Mode"
-            defaultValue={utils.localStorageGetter().appMode}
-            onChange={( event, newValue ) => modeInputHandler( newValue )}
-          />
-        </div>*/}
         <div className='AppModeSelector' style={{ display: "grid", maxWidth: '75%', marginBottom: '10px' }}>
           <ComboBox
             componentRef={comboBoxRef}
@@ -74,11 +68,18 @@ const SecretSettings = ( props: any ) => {
             </div>
           </div>
           : null}
+          {globalState.appModeState === 4 ?
+          <div style={settingsListItemStyle}>
+            <div style={{ paddingTop: '2px', paddingBottom: '10px', borderTop: '1px solid whitesmoke', borderBottom: '1px solid whitesmoke' }}>
+            <PhoneRegexForm />
+            </div>
+          </div>
+          : null}
         <div style={settingsListItemStyle}>
           <TextField label="Custom Theme JSON" disabled placeholder='Coming Eventually' multiline rows={15} resizable={false} />
         </div>
         <div style={settingsListItemStyle}>
-          <button style={{ height: 30, width: '75%' }} onClick={useSettingsChange( 'theme' )}>Setting Test Button</button>
+          <button style={{ height: 30, width: '75%' }} onClick={() => alert( 'you clicked a button lol' )}>Setting Test Button</button>
           <button style={{ height: 30, width: '75%' }} onClick={() => console.log(tempV)}>Env Vars Test Button</button>
         </div>
       </div>
