@@ -14,12 +14,13 @@ const SmsComponent: React.FunctionComponent = () => {
   const [numberInput, setNumberInput] = useState( '' );
 
   let params = new URLSearchParams( document.location.search );
-  let number = '+' + params.get( 'callernumber' );
-
-  console.log( number )
+  let number = params.get( 'callernumber' );
 
   useEffect( () => {
-    setNumberInput(number);
+    if (number !== null || undefined) {
+      //@ts-ignore
+      setNumberInput(number); 
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
 
