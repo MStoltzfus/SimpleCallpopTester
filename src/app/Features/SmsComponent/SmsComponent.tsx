@@ -1,10 +1,6 @@
 import { DefaultButton, ISearchBoxStyles, TextField } from '@fluentui/react';
-import { mainContentStyle } from '../../styles'; // import the styles from the styles file
-import utils from '../../utils';
-import { UnderConstructionHeader } from '../../sharedComponents/UnderConstructionHeader';
 import { useCallback, useEffect, useState } from 'react';
-import { useGlobalState } from '../../../GlobalState/GlobalStateProvider';
-import { sendSms } from './acsApiUtils';
+//import { sendSms } from './acsApiUtils.ts.bak';
 
 export const searchBoxStyles: Partial<ISearchBoxStyles> = { root: { width: 200 } };
 
@@ -17,9 +13,9 @@ const SmsComponent: React.FunctionComponent = () => {
   let number = params.get( 'callernumber' );
 
   useEffect( () => {
-    if (number !== null || undefined) {
+    if ( number !== null || undefined ) {
       //@ts-ignore
-      setNumberInput(number); 
+      setNumberInput( number );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] );
@@ -40,7 +36,8 @@ const SmsComponent: React.FunctionComponent = () => {
 
   const handleSubmit = ( e: { preventDefault: () => void; } ) => {
     e.preventDefault();
-    sendSms( numberInput, messageInput )
+    alert( 'This Mode Is No Longer Supported' )
+    //sendSms( numberInput, messageInput )
   }
 
   return (
@@ -63,10 +60,11 @@ const SmsComponent: React.FunctionComponent = () => {
           }}>
           <h3>ACS SMS Tester</h3>
         </div>
+        <h2 style={{ width: '75%' }}>The SMS Sending Mode Was a Demo and Has Been Disabled Due to ACS Costs</h2>
         <p style={{ width: '75%' }}>This App Mode lets you send a text to the "callernumber" parameter taken from the callpop URL</p>
         <form className='messageInputForm' onSubmit={handleSubmit}>
           <div className='form-control' style={{ width: '100%', paddingBottom: '1rem' }}>
-          <TextField
+            <TextField
               label='Number'
               type='text'
               id='numberInput'
