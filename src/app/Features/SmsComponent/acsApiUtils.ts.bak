@@ -1,9 +1,13 @@
 import { SmsClient } from '@azure/communication-sms';
+import utils from '../../utils';
 
-// This code retrieves your connection string
-// from an environment variable.
-//@ts-ignore
-const connectionString = import.meta.env.VITE_COMMUNICATION_SERVICES_CONNECTION_STRING;
+// This code retrieves the connection string from an environment variable.
+//const connectionString: string = import.meta.env.VITE_COMMUNICATION_SERVICES_CONNECTION_STRING;
+const acsPhoneNumber: string = import.meta.env.VITE_COMMUNICATION_SERVICES_PHONE_NUMBER
+
+const connectionString: string = utils.localStorageGetter().acsConnectionString;
+//const connectionString: string = prompt('Enter a Connection String');
+//const acsPhoneNumber: string = utils.localStorageGetter().acsPhoneNumber;
 
 // Instantiate the SMS client.
 const smsClient = new SmsClient(connectionString);
@@ -11,7 +15,7 @@ const smsClient = new SmsClient(connectionString);
 async function sendSms(callerNumber:string, messageText:string) {
     const sendResults = await smsClient.send({
     //@ts-ignore
-      from: import.meta.env.VITE_COMMUNICATION_SERVICES_PHONE_NUMBER,
+      from: acsPhoneNumber,
       to: [callerNumber],
       message: messageText
     });
@@ -24,7 +28,7 @@ async function sendSms(callerNumber:string, messageText:string) {
         alert('Message Sent Successfully!')
       } else {
         console.error("Something went wrong when trying to send this message: ", sendResult);
-        alert('There was an error. Check the browser console for more information.')
+        alert('There was an error. ' + sendResult)
       }
     }
   }
