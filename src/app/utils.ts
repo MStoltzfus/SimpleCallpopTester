@@ -124,18 +124,26 @@ const utils = {
           saveLocalSettings(settings);
           break;
         case "numberNormalizationRule":
-          settings.numberNormalizationRule = settingValue
+          settings.numberNormalizationRule = settingValue;
+          saveLocalSettings(settings);
+          break;
+        case "acsConnectionString":
+          settings.acsConnectionString = settingValue;
+          saveLocalSettings(settings);
+          break;
+        case "acsPhoneNumber":
+          settings.acsPhoneNumber = settingValue;
           saveLocalSettings(settings);
           break;
         default:
-          alert('invalid setting')
+          alert("invalid setting");
       }
       return console.log("updated settings: ", settings);
     }
     return console.error("settings storage error");
   },
   isValidMsGuid(str: string) {
-    const regEx =
+    const regEx: RegExp =
       /^[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/;
     return regEx.test(str);
   },
@@ -153,8 +161,10 @@ const utils = {
   },
   async getMsalToken() {
     if (Providers.globalProvider.state === ProviderState.SignedIn) {
-      const token = await Providers.globalProvider.getAccessToken({scopes: ['User.Read']})
-      return token
+      const token = await Providers.globalProvider.getAccessToken({
+        scopes: ["User.Read"],
+      });
+      return token;
     }
   },
 };
