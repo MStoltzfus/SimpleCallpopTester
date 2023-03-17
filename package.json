@@ -5,9 +5,9 @@
   "dependencies": {
     "@azure/communication-sms": "^1.0.0",
     "@fluentui/react": "^8.0.0",
-    "@microsoft/mgt-element": "^2.6.0",
-    "@microsoft/mgt-msal2-provider": "^2.6.0",
-    "@microsoft/mgt-react": "^2.6.0",
+    "@microsoft/mgt-element": "^2.9.2",
+    "@microsoft/mgt-msal2-provider": "^2.9.2",
+    "@microsoft/mgt-react": "^2.9.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

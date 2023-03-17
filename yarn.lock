@@ -633,43 +633,43 @@
   resolved "https://registry.npmjs.org/@microsoft/load-themed-styles/-/load-themed-styles-1.10.247.tgz"
   integrity sha512-vKbuG3Mcbc4kkNAcIE13aIv5KoI2g+tHFFIZnFhtUilpYHc0VsMd4Fw7Jz81A8AB7L3wWu3OZB2CNiRnr1a3ew==
 
-"@microsoft/mgt-components@2.6.0":
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/@microsoft/mgt-components/-/mgt-components-2.6.0.tgz"
-  integrity sha512-KjTQkdReHrYNbxW+XZ6012Kh3T81mGpboSYz0it0odD3lF98W0OUGfmVV7Ye3y2ReHjzUDbcW7WYsFHNBHUjQQ==
+"@microsoft/mgt-components@2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/mgt-components/-/mgt-components-2.9.2.tgz#6f8c9800859534fb75530abce688082ffd977069"
+  integrity sha512-JPkmCJT62aqkIUuz1bztWjWCmIc/5DFOI8QReBOXuc5e436ys+jB43t6yUgGaZhz3rKADzxT7CEFm+1RzM3HSQ==
   dependencies:
     "@fluentui/web-components" "0.22.1"
-    "@microsoft/mgt-element" "2.6.0"
+    "@microsoft/mgt-element" "2.9.2"
     "@microsoft/microsoft-graph-client" "^2.2.1"
     "@microsoft/microsoft-graph-types" "^2.0.0"
     "@microsoft/microsoft-graph-types-beta" "^0.16.0-preview"
     office-ui-fabric-core "11.0.0"
 
-"@microsoft/mgt-element@2.6.0", "@microsoft/mgt-element@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/@microsoft/mgt-element/-/mgt-element-2.6.0.tgz"
-  integrity sha512-a2sRdz7vAKeRaqVeW2vPDDUNT4a8JVBl/tu5UpLYMDDqsufgi1T+msg+WVTt8gky+wZXv/YJ7YOHb8S7phZx+w==
+"@microsoft/mgt-element@2.9.2", "@microsoft/mgt-element@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/mgt-element/-/mgt-element-2.9.2.tgz#bce291115703c9eeecbfe615bc72ecdf585693d0"
+  integrity sha512-G4VGI6ExIiNh6EwpkQc/HWzkyek64NYsCQ6GHaCbDYuP5vqfISF6FFh0RSc/K7izzCZ25DLyEuPq3temrkYkXQ==
   dependencies:
     "@microsoft/microsoft-graph-client" "^2.2.1"
     idb "6.0.0"
     lit-element "^2.4.0"
 
-"@microsoft/mgt-msal2-provider@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/@microsoft/mgt-msal2-provider/-/mgt-msal2-provider-2.6.0.tgz"
-  integrity sha512-tOdMaB2Yri06eeiNsS+aJi99MC2ZXrWyD+I9iALLq+F06+PB2z7dCbBgRYPiTYGL/o3nViaD7CFf1ruQErQ73w==
+"@microsoft/mgt-msal2-provider@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/mgt-msal2-provider/-/mgt-msal2-provider-2.9.2.tgz#f22448a20b5f833136a46853397285d75a85a251"
+  integrity sha512-oymqZS0TflYUhHwLsmnG6oiZDHOjLA5ggGjhXhyvEh7Kyad18rYwRaVNH7gml0/G/WYPPRO4LutwXDc7XLDa2A==
   dependencies:
     "@azure/msal-browser" "^2.22.0"
-    "@microsoft/mgt-element" "2.6.0"
+    "@microsoft/mgt-element" "2.9.2"
     "@microsoft/microsoft-graph-client" "^2.2.1"
 
-"@microsoft/mgt-react@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/@microsoft/mgt-react/-/mgt-react-2.6.0.tgz"
-  integrity sha512-Ti2CGUl9uFpUJ9HvDOL0Ihfq2/OTNIBjeIq9AO2RXxOorLm+50SlhsEXHPb3i5slZ//MPiX897wcG9tcOPZClQ==
+"@microsoft/mgt-react@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/mgt-react/-/mgt-react-2.9.2.tgz#84604e7088175d93579dc0e1a8ff455208accf20"
+  integrity sha512-nGUnbBsBI5ZtaRLw5TZ8tNmBdjwQBdhwbqdCaEiY6/8Ygu/v2Qd/SFXjPofFT1wvTR1uXCFfTM4nx4fgnt6lDQ==
   dependencies:
-    "@microsoft/mgt-components" "2.6.0"
-    "@microsoft/mgt-element" "2.6.0"
+    "@microsoft/mgt-components" "2.9.2"
+    "@microsoft/mgt-element" "2.9.2"
     "@microsoft/microsoft-graph-types" "^2.0.0"
     "@microsoft/microsoft-graph-types-beta" "^0.16.0-preview"
     wc-react "^0.5.0"
@@ -1103,9 +1103,9 @@ camelcase@^5.0.0:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30001312:
-  version "1.0.30001374"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001374.tgz"
-  integrity sha512-mWvzatRx3w+j5wx/mpFN5v5twlPrabG8NqX2c6e45LCpymdoGqNvRkRutFUqpRTXKFQFNQJasvK0YT7suW6/Hw==
+  version "1.0.30001465"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001465.tgz"
+  integrity sha512-HvjgL3MYAJjceTDCcjRnQGjwUz/5qec9n7JPOzUursUoOTIsYCSDOb1l7RsnZE8mjbxG78zVRCKfrBXyvChBag==
 
 chalk@^1.1.3:
   version "1.1.3"

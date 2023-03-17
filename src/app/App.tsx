@@ -6,7 +6,7 @@ import themes from './themes'; // import the themes for FluentUI
 import utils from './utils';
 
 import { Header } from './mainAppComponents/Header';
-import { SimpleGenerator, OutlookContactsConnector, Error, modeDefinitions, Info } from './Features/Features';
+import { SimpleGenerator, OutlookContactsConnector, Error, modeDefinitions, Info, ContactNotes } from './Features/Features';
 import { MsAppIdForm } from './sharedComponents/MsAppIdForm';
 import { useIsSignedIn } from './customHooks';
 import StyledLogin from './sharedComponents/StyledLogin';
@@ -66,6 +66,8 @@ export const App: React.FunctionComponent = () => {
               />;
             case modeDefinitions.smsComponent:
               return <SmsComponent />;
+            case modeDefinitions.ContactNotesComponent:
+              return <ContactNotes />;
             default:
               return <Error
                 errorMessage="Invalid App Mode"
