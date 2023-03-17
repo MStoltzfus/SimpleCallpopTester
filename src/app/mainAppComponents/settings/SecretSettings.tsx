@@ -57,6 +57,7 @@ const SecretSettings = ( props: any ) => {
               { key: modeDefinitions.errorComponentTest, text: '3. Error Test' },
               { key: modeDefinitions.infoComponentTest, text: '4. Info Test' },
               { key: modeDefinitions.smsComponent, text: '4. SMS' },
+              { key: modeDefinitions.ContactNotesComponent, text: '5. Caller Notes' },
             ]}
             onItemClick={( event: React.FormEvent<IComboBox>, option?: IComboBoxOption ) => { modeInputHandler( option?.key ) }}
           />
